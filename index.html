@@ -462,15 +462,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###OS X下安装：</p>
-<ul>
+        <h3 id="OS-X下安装："><a href="#OS-X下安装：" class="headerlink" title="OS X下安装："></a>OS X下安装：</h3><ul>
 <li>brew install node</li>
 <li>npm install -g react-native-cli</li>
 <li>新建一个工程：react-native init MyFirstApp</li>
 <li>运行：react-native run-android 或 react-native run-android</li>
 </ul>
-<p>###从React到React-Native</p>
-<ul>
+<h3 id="从React到React-Native"><a href="#从React到React-Native" class="headerlink" title="从React到React-Native"></a>从React到React-Native</h3><ul>
 <li>RN是基于React，React希望将功能分解化，让开发变得像搭积木一样，快速而且易维护</li>
 <li>React有如下3个特点：<ul>
 <li>作为UI（just the ui）</li>
@@ -485,7 +483,7 @@
 </ul>
 </li>
 </ul>
-<p>###ReactNative props<br>1、什么是props？</p>
+<h3 id="ReactNative-props"><a href="#ReactNative-props" class="headerlink" title="ReactNative props"></a>ReactNative props</h3><p>1、什么是props？</p>
 <ul>
 <li>属性，用来描述组件的特征。是父组件传递给子组件的</li>
 <li>引用子组件时可以自定义属性名，比如：<mycomponment name="‘小明’"></mycomponment></li>
@@ -493,26 +491,17 @@
 <li>可以在MyComponment中设置默认值：static defaultProps={ name:’小红’ }</li>
 <li>可以在MyComponment中设某一属性的类型：static propTypes={ name:PropType.string }</li>
 <li>设置某一属性是必须的：sex:PropTypes.number.isRequired</li>
-<li>延展操作符：<pre><code>render() {
-    var params={name:’小明’,age:18,sex:1};
-        return (
-            &lt;View&gt;
-                &lt;MyComponment {…params}
-                /&gt;
-            &lt;/View&gt;
-        );
-    }
-</code></pre></li>
+<li>延展操作符：</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">    <span class="keyword">var</span> params=&#123;<span class="attr">name</span>:’小明’,<span class="attr">age</span>:<span class="number">18</span>,<span class="attr">sex</span>:<span class="number">1</span>&#125;;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;View&gt;</div><div class="line">                &lt;MyComponment &#123;…params&#125;</div><div class="line">                /&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>2、如何使用props？</p>
 <p>3、什么是默认属性以及它的作用？</p>
 <p>4、如何对props进行约束和检查？</p>
 <p>5、props使用小技巧之延展操作符？</p>
 <p>6、props使用小技巧之解构赋值？</p>
-<p>###React Native state<br>1、什么是state？</p>
+<h3 id="React-Native-state"><a href="#React-Native-state" class="headerlink" title="React Native state"></a>React Native state</h3><p>1、什么是state？</p>
 <p>2、如何使用state？</p>
-<p>###React Native ref</p>
-<p>1、什么是ref？</p>
+<h3 id="React-Native-ref"><a href="#React-Native-ref" class="headerlink" title="React Native ref"></a>React Native ref</h3><p>1、什么是ref？</p>
 <ul>
 <li>ref是组件的一种特殊属性，可以理解为组件被渲染后指向组件的引用，可以通过ref属性来获取真实的组件</li>
 </ul>
