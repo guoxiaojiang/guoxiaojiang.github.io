@@ -442,6 +442,130 @@
 
 
   
+    <article id="post-ReactNative入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/05/ReactNative入门/">ReactNative入门</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/05/ReactNative入门/" class="archive-article-date">
+  	<time datetime="2017-03-05T14:11:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###OS X下安装：</p>
+<ul>
+<li>brew install node</li>
+<li>npm install -g react-native-cli</li>
+<li>新建一个工程：react-native init MyFirstApp</li>
+<li>运行：react-native run-android 或 react-native run-android</li>
+</ul>
+<p>###从React到React-Native</p>
+<ul>
+<li>RN是基于React，React希望将功能分解化，让开发变得像搭积木一样，快速而且易维护</li>
+<li>React有如下3个特点：<ul>
+<li>作为UI（just the ui）</li>
+<li>虚拟DOM（virtual dom），这是react的一个重要特性，放进内存，最小更新的视图，差异部分更新，diff算法</li>
+<li>数据流（Data flow）单向数据流</li>
+</ul>
+</li>
+<li>学习React-native需要掌握那些知识？<ul>
+<li>JSX语法（类似于XML）</li>
+<li>ES6相关知识</li>
+<li>前端基础（css+div,js）</li>
+</ul>
+</li>
+</ul>
+<p>###ReactNative props<br>1、什么是props？</p>
+<ul>
+<li>属性，用来描述组件的特征。是父组件传递给子组件的</li>
+<li>引用子组件时可以自定义属性名，比如：<mycomponment name="‘小明’"></mycomponment></li>
+<li>在MyComponment中拿到这个属性值：{this.props.name}</li>
+<li>可以在MyComponment中设置默认值：static defaultProps={ name:’小红’ }</li>
+<li>可以在MyComponment中设某一属性的类型：static propTypes={ name:PropType.string }</li>
+<li>设置某一属性是必须的：sex:PropTypes.number.isRequired</li>
+<li>延展操作符：<pre><code>render() {
+    var params={name:’小明’,age:18,sex:1};
+        return (
+            &lt;View&gt;
+                &lt;MyComponment {…params}
+                /&gt;
+            &lt;/View&gt;
+        );
+    }
+</code></pre></li>
+</ul>
+<p>2、如何使用props？</p>
+<p>3、什么是默认属性以及它的作用？</p>
+<p>4、如何对props进行约束和检查？</p>
+<p>5、props使用小技巧之延展操作符？</p>
+<p>6、props使用小技巧之解构赋值？</p>
+<p>###React Native state<br>1、什么是state？</p>
+<p>2、如何使用state？</p>
+<p>###React Native ref</p>
+<p>1、什么是ref？</p>
+<ul>
+<li>ref是组件的一种特殊属性，可以理解为组件被渲染后指向组件的引用，可以通过ref属性来获取真实的组件</li>
+</ul>
+<p>2、如何使用ref？</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">reactnative</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/tech/" class="article-tag-list-link color5">tech</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/05/ReactNative入门/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
   
 
 
@@ -532,6 +656,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">reactnative</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
