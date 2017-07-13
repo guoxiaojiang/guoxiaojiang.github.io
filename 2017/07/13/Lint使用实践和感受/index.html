@@ -6,17 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2016 | 郭效江</title>
+  <title>Lint使用实践和感受 | 郭效江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="stay hungry stay foolish">
-<meta property="og:type" content="website">
-<meta property="og:title" content="郭效江">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+  <meta name="description" content="Lint使用实践和感受  1.Lint介绍以及使用 从命令行运行 Lint 通过 Gradle 运行 Lint 在Java文件和XML文件中配置对Lint的检查忽略 配置 Lint 文件 通过Gradle配置Lint选项 如何在项目中使用lint检查 2、扩展：自定义lint 3、总结&amp;amp;感悟   代码规范标准化，追求卓越工匠精神，打磨精品代码    1.Lint介绍以及使用Android">
+<meta name="keywords" content="andorid lint">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lint使用实践和感受">
+<meta property="og:url" content="http://yoursite.com/2017/07/13/Lint使用实践和感受/index.html">
 <meta property="og:site_name" content="郭效江">
-<meta property="og:description" content="stay hungry stay foolish">
+<meta property="og:description" content="Lint使用实践和感受  1.Lint介绍以及使用 从命令行运行 Lint 通过 Gradle 运行 Lint 在Java文件和XML文件中配置对Lint的检查忽略 配置 Lint 文件 通过Gradle配置Lint选项 如何在项目中使用lint检查 2、扩展：自定义lint 3、总结&amp;amp;感悟   代码规范标准化，追求卓越工匠精神，打磨精品代码    1.Lint介绍以及使用Android">
+<meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/btutil.jpeg?raw=true">
+<meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi1.jpeg?raw=true">
+<meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi2.jpeg?raw=true">
+<meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi3.jpeg?raw=true">
+<meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi4.jpeg?raw=true">
+<meta property="og:updated_time" content="2017-07-13T09:21:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="郭效江">
-<meta name="twitter:description" content="stay hungry stay foolish">
+<meta name="twitter:title" content="Lint使用实践和感受">
+<meta name="twitter:description" content="Lint使用实践和感受  1.Lint介绍以及使用 从命令行运行 Lint 通过 Gradle 运行 Lint 在Java文件和XML文件中配置对Lint的检查忽略 配置 Lint 文件 通过Gradle配置Lint选项 如何在项目中使用lint检查 2、扩展：自定义lint 3、总结&amp;amp;感悟   代码规范标准化，追求卓越工匠精神，打磨精品代码    1.Lint介绍以及使用Android">
+<meta name="twitter:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/btutil.jpeg?raw=true">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
   
@@ -162,48 +170,167 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Lint使用实践和感受" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/18/Unoffical-Airplay-Protocol-Secification/" class="archive-article-date">
-  	<time datetime="2016-05-17T23:24:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/18/Unoffical-Airplay-Protocol-Secification/">Unoffical Airplay Protocol Secification</a>
+    <h1 class="article-title" itemprop="name">
+      Lint使用实践和感受
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/07/13/Lint使用实践和感受/" class="archive-article-date">
+  	<time datetime="2017-07-13T07:37:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Lint使用实践和感受"><a href="#Lint使用实践和感受" class="headerlink" title="Lint使用实践和感受"></a>Lint使用实践和感受</h1><hr>
+<ul>
+<li><a href="#1">1.Lint介绍以及使用</a><ul>
+<li><a href="#11">从命令行运行 Lint</a></li>
+<li><a href="#12">通过 Gradle 运行 Lint</a></li>
+<li><a href="#13">在Java文件和XML文件中配置对Lint的检查忽略</a></li>
+<li><a href="#14">配置 Lint 文件</a></li>
+<li><a href="#15">通过Gradle配置Lint选项</a></li>
+<li><a href="#16">如何在项目中使用lint检查</a><ul>
+<li><a href="#2">2、扩展：自定义lint</a></li>
+<li><a href="#3">3、总结&amp;感悟</a></li>
+</ul>
+</li>
+<li><a href="#41">代码规范标准化，追求卓越工匠精神，打磨精品代码</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-Lint介绍以及使用"><a href="#1-Lint介绍以及使用" class="headerlink" title="1.Lint介绍以及使用"></a>1.Lint介绍以及使用<a name="1"></a></h2><p>Android Studio 提供一个名为 Lint 的代码扫描工具，可帮助您发现并纠正代码结构质量的问题，而无需实际执行该应用，也不必编写测试用例。该工具会报告其检测到的每个问题并提供该问题的描述消息和严重级别，以便您可以快速确定需要优先进行哪些关键改进。此外，您可以调低问题的严重级别，忽略与项目无关的问题，也可以调高严重级别，以突出特定问题。</p>
+<p>我们除了测试 Android 应用以确保其符合功能要求外，还必须确保代码不存在结构问题。结构混乱的代码会影响 Android 应用的可靠性和效率，增大维护代码的难度。例如，如果 XML 资源文件包含未使用的命名空间，则不仅占用空间，还会导致不必要的处理。其他结构问题，例如使用目标 API 版本不支持的已弃用的元素或 API 调用等，可能导致代码无法正常运行。</p>
+<h4 id="从命令行运行-Lint"><a href="#从命令行运行-Lint" class="headerlink" title="从命令行运行 Lint"></a>从命令行运行 Lint</h4><p>要对项目目录中的文件列表运行 Lint，请使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lint [flags] &lt;project directory&gt;</div></pre></td></tr></table></figure>
+<p>例如，您可以发出以下命令，扫描 myproject 目录及其子目录中的文件。问题 ID MissingPrefix 提示 Lint 仅扫描缺少 Android 命名空间前缀的 XML 属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lint --check MissingPrefix myproject</div></pre></td></tr></table></figure>
+<h4 id="通过-Gradle-运行-Lint"><a href="#通过-Gradle-运行-Lint" class="headerlink" title="通过 Gradle 运行 Lint"></a>通过 Gradle 运行 Lint</h4><p>在 Windows 上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gradlew lint</div></pre></td></tr></table></figure>
+<p>在 Linux 或 Mac 上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gradlew lint</div></pre></td></tr></table></figure>
+<p>如果您只想为特定buildType运行 lint 任务，您必须大写变体名称并在其前面加上 lint 前缀。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gradlew lintDebug</div></pre></td></tr></table></figure>
+<h4 id="在Java文件和XML文件中配置对Lint的检查忽略"><a href="#在Java文件和XML文件中配置对Lint的检查忽略" class="headerlink" title="在Java文件和XML文件中配置对Lint的检查忽略"></a>在Java文件和XML文件中配置对Lint的检查忽略</h4><p>下例说明了如何对 APPSignalInfoActivity 类中的 SetTextI18n 问题关闭 Lint 检查：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SuppressLint</span>(<span class="string">"SetTextI18n"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">APPSignalInfoActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div></pre></td></tr></table></figure>
+<p>下例说明了如何对一个xml布局文件 view_call_key_0.xml 中的 HardcodedText 问题关闭Lint检查：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    <span class="attr">tools:ignore</span>=<span class="string">"HardcodedText"</span></div></pre></td></tr></table></figure>
+<p>要禁止检查 Java 或 xml 文件中的所有 Lint 问题，可使用 all 关键字：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SuppressLint</span>(<span class="string">"all"</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tools:ignore="all"</div></pre></td></tr></table></figure>
+<h4 id="配置-Lint-文件"><a href="#配置-Lint-文件" class="headerlink" title="配置 Lint 文件"></a>配置 Lint 文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">lint</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 自定义组件暂时不用要求使用v7support --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"AppCompatCustomView"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- Gradle Dependency --&gt;</span></div><div class="line">    <span class="comment">&lt;!--&lt;issue id="GradleDependency" severity="ignore" /&gt;--&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 有可能当前图片是一样的，名字不一样，但是业务场景不同，当前不用检查图片内容相同的情况，以便修改方便 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"IconDuplicates"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- ignore: Image without contentDescription --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"ContentDescription"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- ignore: Using left/right instead of start/end attributes --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"RtlHardcoded"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- ignore: Overlapping items in RelativeLayout --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"RelativeOverlap"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- ignore: Missing support for Firebase App Indexing --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"GoogleAppIndexingWarning"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- ignore: Text size is too small, we following by ui designed --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"SmallSp"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- ignore: Missing labelFor attribute, 业务场景不需要 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"LabelFor"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- ignore: Padding and margin symmetry --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"RtlSymmetry"</span> <span class="attr">severity</span>=<span class="string">"ignore"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- ignore: Icon densities validation --&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"InvalidPackage"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ignore</span> <span class="attr">regexp</span>=<span class="string">"okio-1.8.0.jar"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ignore</span> <span class="attr">regexp</span>=<span class="string">"retrofit-2.1.0.jar"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">issue</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- Ignore the HardcodedText issue in the specified files --&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"HardcodedText"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ignore</span> <span class="attr">path</span>=<span class="string">"res/layout/active_test.xml"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">issue</span>&gt;</span></div><div class="line"></div><div class="line">     <span class="comment">&lt;!-- Change the severity of these to "error" --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"HardcodedText"</span> <span class="attr">severity</span>=<span class="string">"error"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"StaticFieldLeak"</span> <span class="attr">severity</span>=<span class="string">"error"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"DrawAllocation"</span> <span class="attr">severity</span>=<span class="string">"error"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"MergeRootFrame"</span> <span class="attr">severity</span>=<span class="string">"error"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"UselessParent"</span> <span class="attr">severity</span>=<span class="string">"error"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">issue</span> <span class="attr">id</span>=<span class="string">"Overdraw"</span> <span class="attr">severity</span>=<span class="string">"error"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">lint</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="通过Gradle配置Lint选项"><a href="#通过Gradle配置Lint选项" class="headerlink" title="通过Gradle配置Lint选项"></a>通过Gradle配置Lint选项</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">lintOptions &#123;</div><div class="line">       <span class="function">lintConfig <span class="title">file</span><span class="params">(<span class="string">"../quality/lint/lint.xml"</span>)</span></span></div><div class="line">       <span class="comment">// if set to true (default), stops the build if errors are found.</span></div><div class="line">       abortOnError <span class="keyword">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>LintOptions所有配置项参考：<br><a href="http://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.LintOptions.html" target="_blank" rel="external">http://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.LintOptions.html</a></p>
+<h4 id="如何在项目中使用lint检查"><a href="#如何在项目中使用lint检查" class="headerlink" title="如何在项目中使用lint检查"></a>如何在项目中使用lint检查</h4><ul>
+<li>在我们的代码或者xml文件中相应区域可以看到lint检查出来的警告信息：</li>
+</ul>
+<p><img src="https://github.com/guoxiaojiang/hello-word/blob/master/btutil.jpeg?raw=true" alt="waring-in-java"></p>
+<ul>
+<li>如何使lint检查出error时打断Run？</li>
+</ul>
+<p>首先，设置abortOnError为true：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lintOptions &#123;</div><div class="line">    abortOnError true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后：</p>
+<p><img src="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi1.jpeg?raw=true" alt="peizhi1"></p>
+<p><img src="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi2.jpeg?raw=true" alt="peizhi2"></p>
+<p><img src="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi3.jpeg?raw=true" alt="peizhi3"></p>
+<p><img src="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi4.jpeg?raw=true" alt="peizhi4"></p>
+<ul>
+<li>Jenkins默认启用Lint检查，只要在build.gradle中设置abortOnError为true即可：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lintOptions &#123;</div><div class="line">    abortOnError true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="如何忽略某个moudle的检查"><a href="#如何忽略某个moudle的检查" class="headerlink" title="如何忽略某个moudle的检查"></a>如何忽略某个moudle的检查</h4><p>有时候我们项目中的某一个moudle是用来测试的，本身不用很关心代码的质量问题，这时候，我们可以在该moudle的build.gradle中做如下设置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tasks.findByName('lint').setEnabled(false)</div></pre></td></tr></table></figure>
+<h4 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h4><ul>
+<li>在多个moudle的项目中，如果某个moudle有一个error或者warning，那么用右键—&gt;open in browser的方式打开html report，有可能会显示不出来，所以为了保险起见，最好在每一个moudle下直接打开这个report html文件 或者 xml文件</li>
+<li>不同Lint版本的默认开启的check项略有不同，最好打开checkAllWarnings，之后再根据需求ignore</li>
+</ul>
+<p>更多参考：<a href="https://developer.android.com/studio/write/lint.html" target="_blank" rel="external">https://developer.android.com/studio/write/lint.html</a></p>
+<h2 id="2、扩展：自定义lint"><a href="#2、扩展：自定义lint" class="headerlink" title="2、扩展：自定义lint"></a>2、扩展：自定义lint<a name="2"></a></h2><p>主要参考了美团的<a href="http://tech.meituan.com/android_custom_lint.html" target="_blank" rel="external">Android自定义Lint实践</a>和<a href="https://android.googlesource.com/platform/tools/base/+/studio-master-dev/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks" target="_blank" rel="external">官方源码</a></p>
+<p>主要使用LinkedIn发方案：将jar放到一个aar中：<a href="https://engineering.linkedin.com/android/writing-custom-lint-checks-gradle" target="_blank" rel="external">Writing Custom Lint Checks with Gradle</a>。</p>
+<p>这里具一个检查在循环体内（for, foreach, while, do-while）进行内存分配（Allocation）的例子。我们知道，在循环体内进行内存分配，如果这个循环次数很多的话，我们这么大频次的内存分配是有性能上的损耗的，甚至会引起内存抖动或者内存泄漏。一个比较合理的方案是，使用<strong>对象池</strong>技术来替代频繁的内存分配（可以了解Message.obtion()就是一种对象池技术）</p>
+<p>大体步骤如下：</p>
+<h4 id="创建Java工程，配置Gradle"><a href="#创建Java工程，配置Gradle" class="headerlink" title="创建Java工程，配置Gradle"></a>创建Java工程，配置Gradle</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="string">'java'</span></div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    <span class="function">compile <span class="title">fileTree</span><span class="params">(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span></span></div><div class="line">    <span class="comment">//当前最新版本25.3.0，推荐使用最新版，因为参考lint-checks的源码时用到了很多新的api</span></div><div class="line">    compile 'com.android.tools.lint:lint-api:25.3.0'</div><div class="line">    compile 'com.android.tools.lint:lint-checks:25.3.0'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="创建Detector"><a href="#创建Detector" class="headerlink" title="创建Detector"></a>创建Detector</h4><p>Detector负责扫描代码，发现问题并报告。这里主要参考了studio自带Lint检查的官方源码<a href="https://android.googlesource.com/platform/tools/base/+/studio-master-dev/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks/JavaPerformanceDetector.java" target="_blank" rel="external">JavaPerformanceDetector</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.guo.example.detectors;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GuoJavaPerformanceDetector</span> <span class="keyword">extends</span> <span class="title">Detector</span> <span class="keyword">implements</span> <span class="title">Detector</span>.<span class="title">JavaPsiScanner</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Implementation IMPLEMENTATION = <span class="keyword">new</span> Implementation(</div><div class="line">            GuoJavaPerformanceDetector.class,</div><div class="line">            Scope.JAVA_FILE_SCOPE);</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Allocating objects in loop body</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Issue LOOP_ALLOC = Issue.create(</div><div class="line">            <span class="string">"LoopCarriedAllocation"</span>,</div><div class="line">            <span class="string">"Memory allocations within loop code"</span>,</div><div class="line">            <span class="string">"应避免在循环体中进行内存分配"</span>,</div><div class="line">            Category.PERFORMANCE,</div><div class="line">            <span class="number">9</span>,</div><div class="line">            Severity.WARNING,</div><div class="line">            IMPLEMENTATION);</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> List&lt;Class&lt;? extends PsiElement&gt;&gt; getApplicablePsiTypes() &#123;</div><div class="line">        List&lt;Class&lt;? extends PsiElement&gt;&gt; types = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">3</span>);</div><div class="line">        types.add(PsiNewExpression.class);</div><div class="line">        types.add(PsiForStatement.class);</div><div class="line">        types.add(PsiForeachStatement.class);</div><div class="line">        types.add(PsiWhileStatement.class);</div><div class="line">        types.add(PsiDoWhileStatement.class);</div><div class="line">        types.add(PsiMethod.class);</div><div class="line">        types.add(PsiMethodCallExpression.class);</div><div class="line">        <span class="keyword">return</span> types;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JavaElementVisitor <span class="title">createPsiVisitor</span><span class="params">(@NonNull JavaContext context)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> PerformanceVisitor(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">PerformanceVisitor</span> <span class="keyword">extends</span> <span class="title">JavaElementVisitor</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> JavaContext mContext;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> mCheckAlloc;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">PerformanceVisitor</span><span class="params">(JavaContext context)</span> </span>&#123;</div><div class="line">            mContext = context;</div><div class="line">            mCheckAlloc = context.isEnabled(LOOP_ALLOC);</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitWhileStatement</span><span class="params">(PsiWhileStatement statement)</span> </span>&#123;</div><div class="line">            statement.accept(<span class="keyword">new</span> JavaRecursiveElementVisitor() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitNewExpression</span><span class="params">(PsiNewExpression node)</span> </span>&#123;</div><div class="line">                    <span class="keyword">if</span> (!(skipParentheses(node.getParent()) <span class="keyword">instanceof</span> PsiThrowStatement)</div><div class="line">                            &amp;&amp; mCheckAlloc) &#123;</div><div class="line">                        PsiMethod method = PsiTreeUtil.getParentOfType(node, PsiMethod.class);</div><div class="line">                        <span class="keyword">if</span> (method != <span class="keyword">null</span> &amp;&amp; !isLazilyInitialized(node)) &#123;</div><div class="line">                            System.out.println(<span class="string">"guo allocation in while:"</span> + node.getNavigationElement());</div><div class="line">                            reportAllocation(node);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitDoWhileStatement</span><span class="params">(PsiDoWhileStatement statement)</span> </span>&#123;</div><div class="line">            statement.accept(<span class="keyword">new</span> JavaRecursiveElementVisitor() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitNewExpression</span><span class="params">(PsiNewExpression node)</span> </span>&#123;</div><div class="line">                    <span class="keyword">if</span> (!(skipParentheses(node.getParent()) <span class="keyword">instanceof</span> PsiThrowStatement)</div><div class="line">                            &amp;&amp; mCheckAlloc) &#123;</div><div class="line">                        PsiMethod method = PsiTreeUtil.getParentOfType(node, PsiMethod.class);</div><div class="line">                        <span class="keyword">if</span> (method != <span class="keyword">null</span> &amp;&amp; !isLazilyInitialized(node)) &#123;</div><div class="line">                            System.out.println(<span class="string">"guo allocation in do-while:"</span> + node.getNavigationElement());</div><div class="line">                            reportAllocation(node);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitForStatement</span><span class="params">(PsiForStatement statement)</span> </span>&#123;</div><div class="line">            statement.accept(<span class="keyword">new</span> JavaRecursiveElementVisitor() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitNewExpression</span><span class="params">(PsiNewExpression node)</span> </span>&#123;</div><div class="line">                    <span class="keyword">if</span> (!(skipParentheses(node.getParent()) <span class="keyword">instanceof</span> PsiThrowStatement)</div><div class="line">                            &amp;&amp; mCheckAlloc) &#123;</div><div class="line">                        PsiMethod method = PsiTreeUtil.getParentOfType(node, PsiMethod.class);</div><div class="line">                        <span class="keyword">if</span> (method != <span class="keyword">null</span> &amp;&amp; !isLazilyInitialized(node)) &#123;</div><div class="line">                            System.out.println(<span class="string">"guo allocation in for:"</span> + node.getNavigationElement());</div><div class="line">                            reportAllocation(node);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitForeachStatement</span><span class="params">(PsiForeachStatement statement)</span> </span>&#123;</div><div class="line">            statement.accept(<span class="keyword">new</span> JavaRecursiveElementVisitor() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitNewExpression</span><span class="params">(PsiNewExpression node)</span> </span>&#123;</div><div class="line">                    <span class="keyword">if</span> (!(skipParentheses(node.getParent()) <span class="keyword">instanceof</span> PsiThrowStatement)</div><div class="line">                            &amp;&amp; mCheckAlloc) &#123;</div><div class="line">                        PsiMethod method = PsiTreeUtil.getParentOfType(node, PsiMethod.class);</div><div class="line">                        <span class="keyword">if</span> (method != <span class="keyword">null</span> &amp;&amp; !isLazilyInitialized(node)) &#123;</div><div class="line">                            System.out.println(<span class="string">"guo allocation in foreach:"</span> + node.getNavigationElement());</div><div class="line">                            reportAllocation(node);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">reportAllocation</span><span class="params">(PsiElement node)</span> </span>&#123;</div><div class="line">            mContext.report(LOOP_ALLOC, node, mContext.getLocation(node),</div><div class="line">                    <span class="string">"Avoid object allocations when looping (preallocate and "</span> +</div><div class="line">                            <span class="string">"reuse instead)"</span>);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">//之后的省略</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>核心在于：监听for、foreach、while、do-while的访问节点，在节点中判断是否有new对象的行为(visitNewExpression)，然后再判断是不是“LazilyInitialized”，去做相关告警提示。</p>
+<h4 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h4><p>可以看到，在GuoJavaPerformanceDetector.java中有一个Issue对象LOOP_ALLOC，其作用是提供给registry，最终体现在Lint report中。</p>
+<blockquote>
+<p>Issue.create的各参数对应如下：</p>
+<p>id : 唯一值，应该能简短描述当前问题。利用Java注解或者XML属性进行屏蔽时，使用的就是这个id。</p>
+<p>summary : 简短的总结，通常5-6个字符，描述问题而不是修复措施。</p>
+<p>explanation : 完整的问题解释和修复建议。</p>
+<p>category : 问题类别。详见下文详述部分。</p>
+<p>priority : 优先级。1-10的数字，10为最重要/最严重。</p>
+<p>severity : 严重级别：Fatal, Error, Warning, Informational, Ignore。</p>
+<p>Implementation : 为Issue和Detector提供映射关系，Detector就是当前Detector。声明扫描检测的范围Scope，Scope用来描述Detector需要分析时需要考虑的文件集，包括：Resource文件或目录、Java文件、Class文件。</p>
+</blockquote>
+<h4 id="IssueRegistry"><a href="#IssueRegistry" class="headerlink" title="IssueRegistry"></a>IssueRegistry</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.guo.example;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.android.tools.lint.client.api.IssueRegistry;</div><div class="line"><span class="keyword">import</span> com.android.tools.lint.detector.api.Issue;</div><div class="line"><span class="keyword">import</span> com.guo.example.detectors.GuoJavaPerformanceDetector;</div><div class="line"><span class="keyword">import</span> com.guo.example.detectors.GuoLogDetector;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by guoxiaojiang on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IssueRegister</span> <span class="keyword">extends</span> <span class="title">IssueRegistry</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Issue&gt; <span class="title">getIssues</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"******* start guo issueRegister *******"</span>);</div><div class="line">        <span class="keyword">return</span> Arrays.asList(</div><div class="line">                GuoLogDetector.ISSUE,</div><div class="line">                GuoJavaPerformanceDetector.LOOP_ALLOC</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="在build-grade中声明Lint-Registry属性"><a href="#在build-grade中声明Lint-Registry属性" class="headerlink" title="在build.grade中声明Lint-Registry属性"></a>在build.grade中声明Lint-Registry属性</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">jar &#123;</div><div class="line">    manifest &#123;</div><div class="line">        attributes(<span class="string">"Lint-Registry"</span>: <span class="string">"com.guo.example.IssueRegister"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">configurations &#123;</div><div class="line">    lintJarOutput</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    <span class="function">lintJarOutput <span class="title">files</span><span class="params">(jar)</span></span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="新建一个android-lib-moudle-lint-aar"><a href="#新建一个android-lib-moudle-lint-aar" class="headerlink" title="新建一个android lib moudle lint_aar"></a>新建一个android lib moudle lint_aar</h4><p>lint_aar的build.gradle需要配置如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">configurations &#123;</div><div class="line">    lintJarImport</div><div class="line">&#125;</div><div class="line">dependencies &#123;</div><div class="line">    <span class="function">lintJarImport <span class="title">project</span><span class="params">(path: <span class="string">":lint"</span>, configuration: <span class="string">"lintJarOutput"</span>)</span></span></div><div class="line">&#125;</div><div class="line">task <span class="title">copyLintJar</span><span class="params">(type: Copy)</span> &#123;</div><div class="line">    from(configurations.lintJarImport) &#123;</div><div class="line">        rename &#123;</div><div class="line">            String fileName -&gt;</div><div class="line">                <span class="string">'lint.jar'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    into <span class="string">'build/intermediates/lint/'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">project.afterEvaluate &#123;</div><div class="line">    def compileLintTask = project.tasks.find &#123; it.name == <span class="string">'compileLint'</span> &#125;</div><div class="line">    compileLintTask.dependsOn(copyLintJar)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后我们的待检测moudle依赖这个aar moudle，或者直接使用aar方式依赖即可</p>
+<p>相关代码：<a href="https://github.com/guoxiaojiang/testlint" target="_blank" rel="external">https://github.com/guoxiaojiang/testlint</a></p>
+<h2 id="3、总结-amp-感悟"><a href="#3、总结-amp-感悟" class="headerlink" title="3、总结&amp;感悟 "></a>3、总结&amp;感悟 <a name="3"></a></h2><h4 id="代码规范标准化，追求卓越工匠精神，打磨精品代码"><a href="#代码规范标准化，追求卓越工匠精神，打磨精品代码" class="headerlink" title="代码规范标准化，追求卓越工匠精神，打磨精品代码 "></a>代码规范标准化，追求卓越工匠精神，打磨精品代码 <a name="41"></a></h4><p>我们的工程是由一砖一瓦打造成的，容不得半点疏忽，如果容忍这些砖瓦有任何的瑕疵，那很有可能眼看他起高楼，眼看他宴宾客，眼看他楼塌了。在编码的过程中，我们一定注重细节，细节决定成败，Java部分这里推荐大家阅读阿里的<a href="https://yq.aliyun.com/attachment/download/?id=1651" target="_blank" rel="external">阿里巴巴Java开发手册</a>作参考</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>多谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://raw.githubusercontent.com/guoxiaojiang/hello-word/master/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://raw.githubusercontent.com/guoxiaojiang/hello-word/master/WX20170505.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">airplay</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">andorid lint</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -216,17 +343,98 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/07/13/Lint使用实践和感受/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/06/15/使用RecyclerView实现的卡片组件——PokerView/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用RecyclerView实现的卡片组件——PokerView</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2017/07/13/Lint使用实践和感受/", 
+    sourceId: "Lint使用实践和感受",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -249,8 +457,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
