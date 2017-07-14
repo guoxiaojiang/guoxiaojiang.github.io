@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi2.jpeg?raw=true">
 <meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi3.jpeg?raw=true">
 <meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi4.jpeg?raw=true">
-<meta property="og:updated_time" content="2017-07-13T09:36:01.000Z">
+<meta property="og:updated_time" content="2017-07-14T02:18:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lint使用实践和感受">
 <meta name="twitter:description" content="Lint使用实践和感受  1、Lint介绍以及使用 2、扩展：自定义lint 3、总结&amp;amp;感悟  1、Lint介绍以及使用Android Studio 提供一个名为 Lint 的代码扫描工具，可帮助您发现并纠正代码结构质量的问题，而无需实际执行该应用，也不必编写测试用例。该工具会报告其检测到的每个问题并提供该问题的描述消息和严重级别，以便您可以快速确定需要优先进行哪些关键改进。此外，您可以调">
@@ -245,7 +245,8 @@
 <p>更多参考：<a href="https://developer.android.com/studio/write/lint.html" target="_blank" rel="external">https://developer.android.com/studio/write/lint.html</a></p>
 <h2 id="2、扩展：自定义lint"><a href="#2、扩展：自定义lint" class="headerlink" title="2、扩展：自定义lint"></a>2、扩展：自定义lint<a name="2"></a></h2><p>主要参考了美团的<a href="http://tech.meituan.com/android_custom_lint.html" target="_blank" rel="external">Android自定义Lint实践</a>和<a href="https://android.googlesource.com/platform/tools/base/+/studio-master-dev/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks" target="_blank" rel="external">官方源码</a></p>
 <p>主要使用LinkedIn发方案：将jar放到一个aar中：<a href="https://engineering.linkedin.com/android/writing-custom-lint-checks-gradle" target="_blank" rel="external">Writing Custom Lint Checks with Gradle</a>。</p>
-<p>这里具一个检查在循环体内（for, foreach, while, do-while）进行内存分配（Allocation）的例子。我们知道，在循环体内进行内存分配，如果这个循环次数很多的话，我们这么大频次的内存分配是有性能上的损耗的，甚至会引起内存抖动或者内存泄漏。一个比较合理的方案是，使用<strong>对象池</strong>技术来替代频繁的内存分配（可以了解Message.obtion()就是一种对象池技术）</p>
+<p>这里举一个检查在循环体内（for, foreach, while, do-while）进行内存分配（Allocation）的例子。我们知道，在循环体内进行内存分配，如果这个循环次数很多的话，我们这么大频次的内存分配是有性能上的损耗的，甚至会引起内存抖动或者内存泄漏。一个比较合理的方案是，使用<strong>对象池</strong>技术来替代频繁的内存分配（可以了解Message.obtion()就是一种对象池技术）</p>
+<p>由于官方的Lint没有这样的chek项，所以需要自定义。</p>
 <p>大体步骤如下：</p>
 <h4 id="创建Java工程，配置Gradle"><a href="#创建Java工程，配置Gradle" class="headerlink" title="创建Java工程，配置Gradle"></a>创建Java工程，配置Gradle</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="string">'java'</span></div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    <span class="function">compile <span class="title">fileTree</span><span class="params">(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span></span></div><div class="line">    <span class="comment">//当前最新版本25.3.0，推荐使用最新版，因为参考lint-checks的源码时用到了很多新的api</span></div><div class="line">    compile 'com.android.tools.lint:lint-api:25.3.0'</div><div class="line">    compile 'com.android.tools.lint:lint-checks:25.3.0'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="创建Detector"><a href="#创建Detector" class="headerlink" title="创建Detector"></a>创建Detector</h4><p>Detector负责扫描代码，发现问题并报告。这里主要参考了studio自带Lint检查的官方源码<a href="https://android.googlesource.com/platform/tools/base/+/studio-master-dev/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks/JavaPerformanceDetector.java" target="_blank" rel="external">JavaPerformanceDetector</a></p>
@@ -515,11 +516,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">reactnative</a>
+                <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lint</a>
+                <a href="javascript:void(0)" class="js-tag color2">reactnative</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,11 +528,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
               </li>
             
             <div class="clearfix"></div>
