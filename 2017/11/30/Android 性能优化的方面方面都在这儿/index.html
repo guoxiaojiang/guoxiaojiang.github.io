@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/30/Android 性能优化的方面方面都在这儿/index.html">
 <meta property="og:site_name" content="郭效江">
 <meta property="og:description" content="原创 2017-11-18 鸿洋 鸿洋  注：本文为搬运鸿洋大神公众号内容：https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ，纯粹为方便学习和参阅，感谢大神精彩的整理和总结，如有侵权，请告知  又到周六了，鸿洋的不定期的周六放送又来了~~这次来谈谈性能优化吧。大家在工作中或多或少都会拿自家的应用和竞品app做比对，不可避免的需要做一些app性能优化">
-<meta property="og:updated_time" content="2017-11-30T02:50:22.371Z">
+<meta property="og:updated_time" content="2017-11-30T03:52:36.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[搬运工]必知必会 | Android 性能优化的方面方面都在这儿">
 <meta name="twitter:description" content="原创 2017-11-18 鸿洋 鸿洋  注：本文为搬运鸿洋大神公众号内容：https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ，纯粹为方便学习和参阅，感谢大神精彩的整理和总结，如有侵权，请告知  又到周六了，鸿洋的不定期的周六放送又来了~~这次来谈谈性能优化吧。大家在工作中或多或少都会拿自家的应用和竞品app做比对，不可避免的需要做一些app性能优化">
@@ -215,6 +215,7 @@
 <p>所以本文从共性的角度来看，主要介绍的就是针对以上5个方面的检测工具以及调优方式了。</p>
 <h2 id="1-App启动速度优化"><a href="#1-App启动速度优化" class="headerlink" title="1 App启动速度优化"></a>1 App启动速度优化</h2><p>对于App启动速度优化，一般情况下我们会利用主题去防止出现白屏；针对启动速度慢，需要尽可能减少Application的onCreate中所要做的事情，比如一些不重要的SDK延迟或者异步加载；多进程情况下一定要可以在onCreate中去区分进程做一些初始化工作；部分将要使用到的类异步加载；还有针对multidex专门做优化的（当然这个随着5.0以上的设备越来越多，影响倒是没有那么大了）。</p>
 <p>下面针对各个方面推荐一些文章：</p>
+<a id="more"></a>
 <ul>
 <li>Android性能优化（一）之启动加速35%<br><a href="http://www.jianshu.com/p/f5514b1a826c" target="_blank" rel="external">http://www.jianshu.com/p/f5514b1a826c</a></li>
 <li>Android冷启动白屏解析，带你一步步分析和解决问题<br><a href="http://blog.csdn.net/guolin_blog/article/details/51019856" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/51019856</a></li>
@@ -552,11 +553,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
+                <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lint</a>
+                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,11 +565,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
             
             <div class="clearfix"></div>
