@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/30/Android 性能优化的方面方面都在这儿/index.html">
 <meta property="og:site_name" content="郭效江">
 <meta property="og:description" content="原创 2017-11-18 鸿洋 鸿洋  注：本文为搬运鸿洋大神公众号内容：https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ，纯粹为方便学习和参阅，感谢大神精彩的整理和总结，如有侵权，请告知  又到周六了，鸿洋的不定期的周六放送又来了~~这次来谈谈性能优化吧。大家在工作中或多或少都会拿自家的应用和竞品app做比对，不可避免的需要做一些app性能优化">
-<meta property="og:updated_time" content="2017-11-30T04:54:17.204Z">
+<meta property="og:updated_time" content="2017-11-30T04:58:54.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[搬运工]必知必会 | Android 性能优化的方面方面都在这儿">
 <meta name="twitter:description" content="原创 2017-11-18 鸿洋 鸿洋  注：本文为搬运鸿洋大神公众号内容：https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ，纯粹为方便学习和参阅，感谢大神精彩的整理和总结，如有侵权，请告知  又到周六了，鸿洋的不定期的周六放送又来了~~这次来谈谈性能优化吧。大家在工作中或多或少都会拿自家的应用和竞品app做比对，不可避免的需要做一些app性能优化">
@@ -207,12 +207,11 @@
 <li>UI流畅度优化</li>
 <li>内存优化</li>
 <li>apk瘦身</li>
-<li>电量优化</li>
+<li>电量优化<a id="more"></a>
+还有些网络速度优化、以及特定类型app的一些针对性的优化，比如播放器起播速度等…</li>
 </ul>
-<p>还有些网络速度优化、以及特定类型app的一些针对性的优化，比如播放器起播速度等…</p>
 <p>我们重点谈论上面5个方面。</p>
 <p>性能优化正常的流程是，发现自己某方面与竞品差距比较大，比如UI渲染速度，需要通过某种方式去发现为什么比别人慢，往往需要利用一些工具，然后可以做一些针对性的调优（代码优化、实现方式改变等），当然了在调优的过程中会有一些通用性的调优方式可以帮助你。</p>
-<a id="more"></a>
 <p>所以本文从共性的角度来看，主要介绍的就是针对以上5个方面的检测工具以及调优方式了。</p>
 <h2 id="1-App启动速度优化"><a href="#1-App启动速度优化" class="headerlink" title="1 App启动速度优化"></a>1 App启动速度优化</h2><p>对于App启动速度优化，一般情况下我们会利用主题去防止出现白屏；针对启动速度慢，需要尽可能减少Application的onCreate中所要做的事情，比如一些不重要的SDK延迟或者异步加载；多进程情况下一定要可以在onCreate中去区分进程做一些初始化工作；部分将要使用到的类异步加载；还有针对multidex专门做优化的（当然这个随着5.0以上的设备越来越多，影响倒是没有那么大了）。</p>
 <p>下面针对各个方面推荐一些文章：</p>
@@ -549,15 +548,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+                <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,11 +564,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
+                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lint</a>
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
             
             <div class="clearfix"></div>
