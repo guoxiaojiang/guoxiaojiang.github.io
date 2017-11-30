@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi2.jpeg?raw=true">
 <meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi3.jpeg?raw=true">
 <meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/blob/master/peizhi4.jpeg?raw=true">
-<meta property="og:updated_time" content="2017-11-30T02:59:19.643Z">
+<meta property="og:updated_time" content="2017-11-30T04:54:47.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lint使用实践和感受">
 <meta name="twitter:description" content="1、Lint介绍以及使用 2、扩展：自定义lint 3、总结&amp;amp;感悟  1、Lint介绍以及使用Android Studio 提供一个名为 Lint 的代码扫描工具，可帮助您发现并纠正代码结构质量的问题，而无需实际执行该应用，也不必编写测试用例。该工具会报告其检测到的每个问题并提供该问题的描述消息和严重级别，以便您可以快速确定需要优先进行哪些关键改进。此外，您可以调低问题的严重级别，忽略与">
@@ -209,6 +209,7 @@
 </ul>
 <h2 id="1、Lint介绍以及使用"><a href="#1、Lint介绍以及使用" class="headerlink" title="1、Lint介绍以及使用"></a>1、Lint介绍以及使用<a name="1"></a></h2><p>Android Studio 提供一个名为 Lint 的代码扫描工具，可帮助您发现并纠正代码结构质量的问题，而无需实际执行该应用，也不必编写测试用例。该工具会报告其检测到的每个问题并提供该问题的描述消息和严重级别，以便您可以快速确定需要优先进行哪些关键改进。此外，您可以调低问题的严重级别，忽略与项目无关的问题，也可以调高严重级别，以突出特定问题。</p>
 <p>我们除了测试 Android 应用以确保其符合功能要求外，还必须确保代码不存在结构问题。结构混乱的代码会影响 Android 应用的可靠性和效率，增大维护代码的难度。例如，如果 XML 资源文件包含未使用的命名空间，则不仅占用空间，还会导致不必要的处理。其他结构问题，例如使用目标 API 版本不支持的已弃用的元素或 API 调用等，可能导致代码无法正常运行。</p>
+<a id="more"></a>
 <h4 id="从命令行运行-Lint"><a href="#从命令行运行-Lint" class="headerlink" title="从命令行运行 Lint"></a>从命令行运行 Lint</h4><p>要对项目目录中的文件列表运行 Lint，请使用以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lint [flags] &lt;project directory&gt;</div></pre></td></tr></table></figure>
 <p>例如，您可以发出以下命令，扫描 myproject 目录及其子目录中的文件。问题 ID MissingPrefix 提示 Lint 仅扫描缺少 Android 命名空间前缀的 XML 属性。</p>
@@ -551,19 +552,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,7 +564,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
             
             <div class="clearfix"></div>

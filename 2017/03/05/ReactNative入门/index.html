@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>ReactNative入门 | 郭效江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="OS X下安装： brew install node npm install -g react-native-cli 新建一个工程：react-native init MyFirstApp 运行：react-native run-android 或 react-native run-android  从React到React-Native RN是基于React，React希望将功能分解化，让开发变">
+  <meta name="description" content="OS X下安装： brew install node npm install -g react-native-cli 新建一个工程：react-native init MyFirstApp 运行：react-native run-android 或 react-native run-android">
 <meta name="keywords" content="-reactnative - tech">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ReactNative入门">
 <meta property="og:url" content="http://yoursite.com/2017/03/05/ReactNative入门/index.html">
 <meta property="og:site_name" content="郭效江">
-<meta property="og:description" content="OS X下安装： brew install node npm install -g react-native-cli 新建一个工程：react-native init MyFirstApp 运行：react-native run-android 或 react-native run-android  从React到React-Native RN是基于React，React希望将功能分解化，让开发变">
-<meta property="og:updated_time" content="2017-11-30T02:57:41.603Z">
+<meta property="og:description" content="OS X下安装： brew install node npm install -g react-native-cli 新建一个工程：react-native init MyFirstApp 运行：react-native run-android 或 react-native run-android">
+<meta property="og:updated_time" content="2017-11-30T04:54:57.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReactNative入门">
-<meta name="twitter:description" content="OS X下安装： brew install node npm install -g react-native-cli 新建一个工程：react-native init MyFirstApp 运行：react-native run-android 或 react-native run-android  从React到React-Native RN是基于React，React希望将功能分解化，让开发变">
+<meta name="twitter:description" content="OS X下安装： brew install node npm install -g react-native-cli 新建一个工程：react-native init MyFirstApp 运行：react-native run-android 或 react-native run-android">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
   
@@ -202,6 +202,7 @@
 <li>新建一个工程：react-native init MyFirstApp</li>
 <li>运行：react-native run-android 或 react-native run-android</li>
 </ul>
+<a id="more"></a>
 <h3 id="从React到React-Native"><a href="#从React到React-Native" class="headerlink" title="从React到React-Native"></a>从React到React-Native</h3><ul>
 <li>RN是基于React，React希望将功能分解化，让开发变得像搭积木一样，快速而且易维护</li>
 <li>React有如下3个特点：<ul>
@@ -227,7 +228,7 @@
 <li>设置某一属性是必须的：sex:PropTypes.number.isRequired</li>
 <li>延展操作符：</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">    <span class="keyword">var</span> params=&#123;<span class="attr">name</span>:’小明’,<span class="attr">age</span>:<span class="number">18</span>,<span class="attr">sex</span>:<span class="number">1</span>&#125;;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span></span></div><div class="line">                <span class="tag">&lt;<span class="name">MyComponment</span> &#123;…<span class="attr">params</span>&#125;</span></div><div class="line">                /&gt;</div><div class="line">            <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">    <span class="keyword">var</span> params=&#123;<span class="attr">name</span>:’小明’,<span class="attr">age</span>:<span class="number">18</span>,<span class="attr">sex</span>:<span class="number">1</span>&#125;;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;View&gt;</div><div class="line">                &lt;MyComponment &#123;…params&#125;</div><div class="line">                /&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>2、如何使用props？</p>
 <p>3、什么是默认属性以及它的作用？</p>
 <p>4、如何对props进行约束和检查？</p>
@@ -506,19 +507,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,7 +519,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
             
             <div class="clearfix"></div>
