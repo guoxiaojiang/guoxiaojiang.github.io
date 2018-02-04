@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 搬运 | 郭效江</title>
+  <title>阅读理解tinker | 郭效江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="stay hungry stay foolish">
-<meta property="og:type" content="website">
-<meta property="og:title" content="郭效江">
-<meta property="og:url" content="http://yoursite.com/tags/搬运/index.html">
+  <meta name="description" content="生成补丁包的原理先借用一张图来说明 接下来我们看一下构建补丁包相关的一些关键类的类图  Decoder的设计采用了装饰器模式 差量dex的生成： DexDiffDecoder.patch中没有真正生成，而是把所有的dex新旧对应Map放入一个List中（multiDex的apk可能有多个dex），如果新apk中的dex是新增的，则直接copy到即将生成的补丁文件中 之后会调用DexDiffDeco">
+<meta name="keywords" content="tech">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阅读理解tinker">
+<meta property="og:url" content="http://yoursite.com/2018/02/04/阅读理解tinker/index.html">
 <meta property="og:site_name" content="郭效江">
-<meta property="og:description" content="stay hungry stay foolish">
+<meta property="og:description" content="生成补丁包的原理先借用一张图来说明 接下来我们看一下构建补丁包相关的一些关键类的类图  Decoder的设计采用了装饰器模式 差量dex的生成： DexDiffDecoder.patch中没有真正生成，而是把所有的dex新旧对应Map放入一个List中（multiDex的apk可能有多个dex），如果新apk中的dex是新增的，则直接copy到即将生成的补丁文件中 之后会调用DexDiffDeco">
+<meta property="og:image" content="http://img.blog.csdn.net/20170115201301296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="file:///Users/guoxiaojiang/Desktop/tinker/tinker核心类图.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20170115200539675?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="file:///Users/guoxiaojiang/Desktop/tinker/tinker合并补丁包核心类图.png">
+<meta property="og:updated_time" content="2018-02-04T04:25:43.537Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="郭效江">
-<meta name="twitter:description" content="stay hungry stay foolish">
+<meta name="twitter:title" content="阅读理解tinker">
+<meta name="twitter:description" content="生成补丁包的原理先借用一张图来说明 接下来我们看一下构建补丁包相关的一些关键类的类图  Decoder的设计采用了装饰器模式 差量dex的生成： DexDiffDecoder.patch中没有真正生成，而是把所有的dex新旧对应Map放入一个List中（multiDex的apk可能有多个dex），如果新apk中的dex是新增的，则直接copy到即将生成的补丁文件中 之后会调用DexDiffDeco">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170115201301296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
   
@@ -174,36 +181,143 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-阅读理解tinker" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/30/Android 性能优化的方面方面都在这儿/" class="archive-article-date">
-  	<time datetime="2017-11-30T04:52:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/30/Android 性能优化的方面方面都在这儿/">[搬运工]必知必会 | Android 性能优化的方面方面都在这儿</a>
+    <h1 class="article-title" itemprop="name">
+      阅读理解tinker
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/02/04/阅读理解tinker/" class="archive-article-date">
+  	<time datetime="2018-02-04T04:23:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="生成补丁包的原理"><a href="#生成补丁包的原理" class="headerlink" title="生成补丁包的原理"></a>生成补丁包的原理</h3><p>先借用<a href="http://blog.csdn.net/joye123/article/details/54564339" target="_blank" rel="external">一张图</a>来说明<br><img src="http://img.blog.csdn.net/20170115201301296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="tinker build"></p>
+<p>接下来我们看一下构建补丁包相关的一些关键类的类图<br><img src="file:///Users/guoxiaojiang/Desktop/tinker/tinker核心类图.png" alt="tinker classes"></p>
+<ul>
+<li>Decoder的设计采用了装饰器模式</li>
+<li>差量dex的生成：<ul>
+<li>DexDiffDecoder.patch中没有真正生成，而是把所有的dex新旧对应Map放入一个List中（multiDex的apk可能有多个dex），如果新apk中的dex是新增的，则直接copy到即将生成的补丁文件中</li>
+<li>之后会调用DexDiffDecoder.generatePatchedDexInfoFile和DexPatchGenerator.executeAndSaveTo，生成补丁文件，同时，会把具体的差异描述写入dex_mata.txt文件</li>
+<li>DexDiffDecoder.diffDexPairAndFillRelatedInfo函数中会调用DexPatchGenerator.executeAndSaveTo(outputStream)，针对dex的15个区域进行比较，生成差异dex文件，具体的算法参考 <a href="https://www.zybuluo.com/dodola/note/554061" target="_blank" rel="external">dexdiff算法</a></li>
+<li>在此阶段会多生成一个test.dex，它是用来在加载的时候验证dex的加载是否成功的</li>
+</ul>
+</li>
+<li>差量res文件、so文件的生成：ResDiffDecoder、BsDiffDecoder <a href="http://www.daemonology.net/bsdiff/" target="_blank" rel="external">bsdiff算法（二进制文件patch算法）</a></li>
+<li>Let’s RTFSC</li>
+</ul>
+<h3 id="合并补丁包的原理"><a href="#合并补丁包的原理" class="headerlink" title="合并补丁包的原理"></a>合并补丁包的原理</h3><p><img src="http://img.blog.csdn.net/20170115200539675?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="tiner-patch"></p>
+<p>接下来我们看一下合并补丁包相关的一些关键类的类图<br><img src="file:///Users/guoxiaojiang/Desktop/tinker/tinker合并补丁包核心类图.png" alt="tinker classes"></p>
+<ul>
+<li><p>合并的过程发生在TinkerPatchService中，在独立进程中进行的：</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:process=":patch"</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行时，将差异patch.dex重新跟原始安装包的旧Dex还原为新的Dex。这个过程可能比较耗费时间与内存，所以我们是单独放在一个后台进程:patch中</p>
+</blockquote>
+</li>
+<li>开始真正合并之前把patch文件copy到了data/data/pkage/tinker目录下，这样做是因为有可能在patch的过程中外部的文件已经被删掉<blockquote>
+<p>we use destPatchFile instead of patchFile, because patchFile may be deleted during the patch process</p>
+</blockquote>
+</li>
+<li>通过DexDiffPatchInternal.extractDexDiffInternals(context, dir, meta, patchFile, TYPE_DEX)验证差分dex 相关合法性（MD5、crc值、是否已存在）通过之后，提取出原dex文件和拆分的dex文件</li>
+<li>通过DexDiffPatchInternal.patchDexFile(baseApk, patchPkg, oldDexEntry, patchFileEntry, patchInfo, patchedDexFile)来生成合并之后的全量dex，最终是通过DexPatchApplier.executeAndSaveTo(outPutstream)来实现</li>
+<li>DexPatchApplier.executeAndSaveTo(OutputStream out)中会对15个dex区域进行patch操作，针对old dex和patch dex进行合并,生成全量dex文件。每个区域的合并算法采用二路归并，在old dex的基础上对元素进行删除，增加，替换操作。这里的算法和生成补丁的DexDiff是一个逆向的过程。</li>
+<li>Let’s RTFSC</li>
+</ul>
+<h3 id="加载补丁包的原理"><a href="#加载补丁包的原理" class="headerlink" title="加载补丁包的原理"></a>加载补丁包的原理</h3><ul>
+<li>启动的是TinkerApplication</li>
+<li>TinkerApplication通过反射的方式将实际的app业务隔离，这样可以在热更新的时候修改实际的application的内容</li>
+<li>在TinkerApplication中的onBaseContextAttached中会通过反射调用TinkerLoader的tryLoad加载已经合成的dex</li>
+<li>主要的工作是在TinkerLoader.tryLoadPatchFilesInternal(tinkerApp, resultIntent)中完成的，做了以下事情：<ul>
+<li>tinkerFlag是否开启，否则不加载</li>
+<li>check tinker目录是否生成，没有则表示没有生成全量的dex，不需要重新加载</li>
+<li>tinker/patch.info是否存在，否则不加载</li>
+<li>读取patch.info，读取失败则不加载</li>
+<li>比较patchInfo的新旧版本，都为空则不加载</li>
+<li>判断版本号是否为空，为空则不加载</li>
+<li>判断patch version directory（//tinker/patch.info/patch-641e634c）是否存在</li>
+<li>判断patchVersionDirectoryFile（//tinker/patch.info/patch-641e634c/patch-641e634c.apk）是否存在</li>
+<li>checkTinkerPackage,（如tinkerId和oldTinkerId不能相等，否则不加载)</li>
+<li>检测dex的完整性，包括dex是否全部生产，是否对dex做了优化，优化后的文件是否存在（//tinker/patch.info/patch-641e634c/dex）</li>
+<li>同样对so res文件进行完整性检测</li>
+<li>最多重试3次</li>
+<li>loadTinkerJars/loadTinkerResources/</li>
+</ul>
+</li>
+</ul>
+<h3 id="优缺点总结"><a href="#优缺点总结" class="headerlink" title="优缺点总结"></a>优缺点总结</h3><ul>
+<li>可以替换class、libs、resources</li>
+<li>补丁包较其它方案要小</li>
+<li>接入比较简单</li>
+<li>在单独进程合并补丁包</li>
+<li>采用Application代理模式，使类Application初始化类也可做热修复，更重要的是解决Android N系统上的混合编译对热修复带来的影响。</li>
+<li>加载补丁失败，有最多重试3次的保护机制</li>
+<li>提供多进程文件操作的文件锁（FileLock）</li>
+<li>成功率较高（官方数据95.5%）</li>
+</ul>
+<hr>
+<ul>
+<li>需要重启生效</li>
+<li>不支持新增四大组件（最新的代码可支持Activity）</li>
+<li>受google应用分发机制，海外版本不能做动态更新</li>
+<li>多个dex会产生多个patch dex</li>
+<li>对Application的结构有所改造</li>
+</ul>
+<p>参考：</p>
+<blockquote>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=2649286384&amp;idx=1&amp;sn=f1aff31d6a567674759be476bcd12549&amp;scene=4#wechat_redirect" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=2649286384&amp;idx=1&amp;sn=f1aff31d6a567674759be476bcd12549&amp;scene=4#wechat_redirect</a></p>
+<p><a href="https://github.com/WeMobileDev/article/blob/master/%E5%BE%AE%E4%BF%A1Android%E7%83%AD%E8%A1%A5%E4%B8%81%E5%AE%9E%E8%B7%B5%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.md" target="_blank" rel="external">https://github.com/WeMobileDev/article/blob/master/%E5%BE%AE%E4%BF%A1Android%E7%83%AD%E8%A1%A5%E4%B8%81%E5%AE%9E%E8%B7%B5%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.md</a></p>
+<p><a href="http://blog.csdn.net/joye123/article/details/54564339" target="_blank" rel="external">http://blog.csdn.net/joye123/article/details/54564339</a></p>
+<p><a href="http://www.cnblogs.com/yyangblog/p/6249715.html" target="_blank" rel="external">http://www.cnblogs.com/yyangblog/p/6249715.html</a></p>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://github.com/guoxiaojiang/hello-word/raw/master/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://github.com/guoxiaojiang/hello-word/raw/master/WX20170505.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -211,15 +325,11 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tech</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搬运</a>
-        		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -232,17 +342,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/02/04/阅读理解tinker/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/02/01/tinker的一个注释/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">tinker的一个注释</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -265,9 +462,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
