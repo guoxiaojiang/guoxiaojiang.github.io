@@ -15,15 +15,15 @@
 <meta property="og:url" content="http://yoursite.com/2018/02/04/阅读理解tinker/index.html">
 <meta property="og:site_name" content="郭效江">
 <meta property="og:description" content="生成补丁包的原理先借用一张图来说明：">
-<meta property="og:image" content="http://img.blog.csdn.net/20170115201301296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/raw/master/20170115201301296.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/hello-word/master/tinker%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%9B%BE.png">
-<meta property="og:image" content="http://img.blog.csdn.net/20170115200539675?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://github.com/guoxiaojiang/hello-word/raw/master/20170115200539675.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/hello-word/master/tinker%E5%90%88%E5%B9%B6%E8%A1%A5%E4%B8%81%E5%8C%85%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-02-04T04:36:44.715Z">
+<meta property="og:updated_time" content="2018-08-03T01:33:45.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阅读理解tinker">
 <meta name="twitter:description" content="生成补丁包的原理先借用一张图来说明：">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170115201301296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="https://github.com/guoxiaojiang/hello-word/raw/master/20170115201301296.png">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
   
@@ -201,7 +201,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="生成补丁包的原理"><a href="#生成补丁包的原理" class="headerlink" title="生成补丁包的原理"></a>生成补丁包的原理</h3><p>先借用<a href="http://blog.csdn.net/joye123/article/details/54564339" target="_blank" rel="external">一张图</a>来说明：<br><img src="http://img.blog.csdn.net/20170115201301296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="tinker build"><br><a id="more"></a></p>
+        <h3 id="生成补丁包的原理"><a href="#生成补丁包的原理" class="headerlink" title="生成补丁包的原理"></a>生成补丁包的原理</h3><p>先借用<a href="http://blog.csdn.net/joye123/article/details/54564339" target="_blank" rel="external">一张图</a>来说明：<br><img src="https://github.com/guoxiaojiang/hello-word/raw/master/20170115201301296.png" alt="tinker build"><br><a id="more"></a></p>
 <p>接下来我们看一下构建补丁包相关的一些关键类的类图<br><img src="https://raw.githubusercontent.com/guoxiaojiang/hello-word/master/tinker%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%9B%BE.png" alt="tinker classes"></p>
 <ul>
 <li>Decoder的设计采用了装饰器模式</li>
@@ -215,7 +215,7 @@
 <li>差量res文件、so文件的生成：ResDiffDecoder、BsDiffDecoder <a href="http://www.daemonology.net/bsdiff/" target="_blank" rel="external">bsdiff算法（二进制文件patch算法）</a></li>
 <li>Let’s RTFSC</li>
 </ul>
-<h3 id="合并补丁包的原理"><a href="#合并补丁包的原理" class="headerlink" title="合并补丁包的原理"></a>合并补丁包的原理</h3><p><img src="http://img.blog.csdn.net/20170115200539675?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvam95ZTEyMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="tiner-patch"></p>
+<h3 id="合并补丁包的原理"><a href="#合并补丁包的原理" class="headerlink" title="合并补丁包的原理"></a>合并补丁包的原理</h3><p><img src="https://github.com/guoxiaojiang/hello-word/raw/master/20170115200539675.png" alt="tiner-patch"></p>
 <p>接下来我们看一下合并补丁包相关的一些关键类的类图<br><img src="https://raw.githubusercontent.com/guoxiaojiang/hello-word/master/tinker%E5%90%88%E5%B9%B6%E8%A1%A5%E4%B8%81%E5%8C%85%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%9B%BE.png" alt="tinker classes"></p>
 <ul>
 <li><p>合并的过程发生在TinkerPatchService中，在独立进程中进行的：</p>
@@ -545,15 +545,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,11 +557,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
               </li>
             
             <div class="clearfix"></div>
