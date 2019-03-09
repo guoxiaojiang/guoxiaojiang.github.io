@@ -176,6 +176,125 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-persistent" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/09/persistent/">persistent-持久应用的那些事儿</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/09/persistent/" class="archive-article-date">
+  	<time datetime="2019-03-09T10:52:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。<br>Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实现还是经过测试验证整个流程没问题的。询问了作者时候发现这一切都是因为在AndroidManifest清单文件的application 设置了:<br><code>android:persistent=&quot;true&quot;</code><br>这个看起来很牛逼的东西之前没有用到过，是因为之前做的都是第三方APP，用也白用。现在我们做系统级应用，就可以开心的使用了。使用之后的效果就是，在系统开机的时候此应用的进程会被自动唤醒，并执行到Application的onCreate中。所以以上代码实现和效果就解释得通了。<br>但是心中的疑惑远远没有被释然，直觉告诉我，这么做是不合理的，所有的业务在Application中就做了，那Android设计的所谓“四大组件”岂不是对于我们这种APP形同虚设？带着各种疑惑，去查看了一下Android官方的文档，并且，RTFSC。现在尝试把过程记录一下（但并不代表疑惑都解除了）</p>
+<h2 id="persistent"><a href="#persistent" class="headerlink" title="persistent"></a>persistent</h2><p>顾名思义，有persistent加持的应用是“永久的”、“持久的”，对我们APP的试验也证明了这一点，在开机很早的时候就启动了这个进程，并且此进程被kill掉之后会顽固地再次起来。官方对此标签解释如下：</p>
+<blockquote>
+<p>android:persistent<br>Whether or not the application should remain running at all times — “true” if it should, and “false” if not. The default value is “false”. Applications should not normally set this flag; persistence mode is intended only for certain system applications.</p>
+</blockquote>
+<p>可见，这个“特权”并不是所有APP都可以用的，要是都可以用，那相当于在一个没有法律，没有道德，没有约束的“王国”里，想干什么就干什么，那这个系统就运作不下去了。</p>
+<h3 id="persistent应用自启动的原理"><a href="#persistent应用自启动的原理" class="headerlink" title="persistent应用自启动的原理"></a>persistent应用自启动的原理</h3><p>先回顾一下系统启动的大致流程吧：<br><img src="https://raw.githubusercontent.com/guoxiaojiang/guoxiaojiang.github.io/master/img/android-boot.png" alt="androidboot"><br>关于Android的启动流程今天不展开讨论，那将是很长的篇幅。想了解的墙裂推荐gityuan大神的系列blog <a href="http://gityuan.com/2016/02/01/android-booting/" target="_blank" rel="external">http://gityuan.com/2016/02/01/android-booting/</a><br>我们就从Zygote start SystemServer之后说起吧：<br>SystemServer的main函数中调用了SystemServer().run()：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    <span class="keyword">new</span> SystemServer().run();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在run函数的最后阶段，启动了各种Service：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">startBootstrapServices();</div><div class="line">startCoreServices();</div><div class="line">startOtherServices();</div></pre></td></tr></table></figure>
+<p>在执行到startOtherServices时，系统的关键服务已经被启动（ActivityManagerService、PowerManagerService、PackageManagerService、WindowManagerService、PackageManagerServcie等等等等），在此处又告诉这些关键Service一件事情：systemReady：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// We now tell the activity manager it is okay to run third party</span></div><div class="line"><span class="comment">// code.  It will call back into us once it has gotten to the state</span></div><div class="line"><span class="comment">// where third party code can really run (but before it has actually</span></div><div class="line"><span class="comment">// started launching the initial applications), for us to complete our</span></div><div class="line"><span class="comment">// initialization.</span></div><div class="line">mActivityManagerService.systemReady(() -&gt; &#123;</div><div class="line">......</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们今天的主角其实就在AMS的systemReady中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">systemReady</span><span class="params">(<span class="keyword">final</span> Runnable goingCallback, TimingsTraceLog traceLog)</span> </span>&#123;</div><div class="line">    ......</div><div class="line">    startPersistentApps(PackageManager.MATCH_DIRECT_BOOT_AWARE);</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>AMS的systemReady()会去遍历查找所有注册了persistent为true的APP：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startPersistentApps</span><span class="params">(<span class="keyword">int</span> matchFlags)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mFactoryTest == FactoryTest.FACTORY_TEST_LOW_LEVEL) <span class="keyword">return</span>;</div><div class="line"></div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">final</span> List&lt;ApplicationInfo&gt; apps = AppGlobals.getPackageManager()</div><div class="line">                    .getPersistentApplications(STOCK_PM_FLAGS | matchFlags).getList();</div><div class="line">            <span class="keyword">for</span> (ApplicationInfo app : apps) &#123;</div><div class="line">                <span class="keyword">if</span> (!<span class="string">"android"</span>.equals(app.packageName)) &#123;</div><div class="line">                    addAppLocked(app, <span class="keyword">null</span>, <span class="keyword">false</span>, <span class="keyword">null</span> <span class="comment">/* ABI override */</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (RemoteException ex) &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以看出，获取persistent列表这件事情最终是由PackageManagerService去完成的。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="meta">@NonNull</span> <span class="function">List&lt;ApplicationInfo&gt; <span class="title">getPersistentApplicationsInternal</span><span class="params">(<span class="keyword">int</span> flags)</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> ArrayList&lt;ApplicationInfo&gt; finalList = <span class="keyword">new</span> ArrayList&lt;ApplicationInfo&gt;();</div><div class="line"></div><div class="line">    <span class="comment">// reader</span></div><div class="line">    <span class="keyword">synchronized</span> (mPackages) &#123;</div><div class="line">        <span class="keyword">final</span> Iterator&lt;PackageParser.Package&gt; i = mPackages.values().iterator();</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> userId = UserHandle.getCallingUserId();</div><div class="line">        <span class="keyword">while</span> (i.hasNext()) &#123;</div><div class="line">            <span class="keyword">final</span> PackageParser.Package p = i.next();</div><div class="line">            <span class="keyword">if</span> (p.applicationInfo == <span class="keyword">null</span>) <span class="keyword">continue</span>;</div><div class="line"></div><div class="line">            <span class="keyword">final</span> <span class="keyword">boolean</span> matchesUnaware = ((flags &amp; MATCH_DIRECT_BOOT_UNAWARE) != <span class="number">0</span>)</div><div class="line">                    &amp;&amp; !p.applicationInfo.isDirectBootAware();</div><div class="line">            <span class="keyword">final</span> <span class="keyword">boolean</span> matchesAware = ((flags &amp; MATCH_DIRECT_BOOT_AWARE) != <span class="number">0</span>)</div><div class="line">                    &amp;&amp; p.applicationInfo.isDirectBootAware();</div><div class="line"></div><div class="line">            <span class="keyword">if</span> ((p.applicationInfo.flags &amp; ApplicationInfo.FLAG_PERSISTENT) != <span class="number">0</span></div><div class="line">                    &amp;&amp; (!mSafeMode || isSystemApp(p))</div><div class="line">                    &amp;&amp; (matchesUnaware || matchesAware)) &#123;</div><div class="line">                PackageSetting ps = mSettings.mPackages.get(p.packageName);</div><div class="line">                <span class="keyword">if</span> (ps != <span class="keyword">null</span>) &#123;</div><div class="line">                    ApplicationInfo ai = PackageParser.generateApplicationInfo(p, flags,</div><div class="line">                            ps.readUserState(userId), userId);</div><div class="line">                    <span class="keyword">if</span> (ai != <span class="keyword">null</span>) &#123;</div><div class="line">                        finalList.add(ai);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> finalList;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这里，命中为PersistentApplication的条件就是，当前应用是系统级应用，或者设备关闭了安全模式。一旦关闭了安全模式，所有应用都可以申请persistent。<br>之后AMS的systemReady()拿到这个list，判断如果应用名不是”android”则执行addAppLocked():<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">final</span> ProcessRecord <span class="title">addAppLocked</span><span class="params">(ApplicationInfo info, String customProcess, <span class="keyword">boolean</span> isolated,</span></span></div><div class="line">        String abiOverride) &#123;</div><div class="line">    ProcessRecord app;</div><div class="line">    ......</div><div class="line">    <span class="keyword">if</span> (app.thread == <span class="keyword">null</span> &amp;&amp; mPersistentStartingProcesses.indexOf(app) &lt; <span class="number">0</span>) &#123;</div><div class="line">        mPersistentStartingProcesses.add(app);</div><div class="line">        startProcessLocked(app, <span class="string">"added application"</span>,</div><div class="line">                customProcess != <span class="keyword">null</span> ? customProcess : app.processName, abiOverride,</div><div class="line">                <span class="keyword">null</span> <span class="comment">/* entryPoint */</span>, <span class="keyword">null</span> <span class="comment">/* entryPointArgs */</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> app;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这里就会判断如果进程没有被启动，则调用startProcessLocked启动之。</p>
+<h3 id="persistent应用自动重启的原理"><a href="#persistent应用自动重启的原理" class="headerlink" title="persistent应用自动重启的原理"></a>persistent应用自动重启的原理</h3><p>上文说到，我们的这个APP除了开机自动启动，还会在启动之后被kill掉的话又重启。这是怎么实现的呢？<br>在每个进程的ActivityThread中，都会和AMS建立通讯，持有一个binder实例：mAppThread。当AMS执行到attachApplicationLocked时，给ActivityThread这一端注册一个AppDeathRecipient（APP讣告监听器），当目标进程挂掉之后，AMS中的AppDeathRecipient会收到这个“讣告”，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> String processName = app.processName;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    AppDeathRecipient adr = <span class="keyword">new</span> AppDeathRecipient(</div><div class="line">            app, pid, thread);</div><div class="line">    thread.asBinder().linkToDeath(adr, <span class="number">0</span>);</div><div class="line">    app.deathRecipient = adr;</div><div class="line">&#125; <span class="keyword">catch</span> (RemoteException e) &#123;</div><div class="line">    app.resetPackageList(mProcessStats);</div><div class="line">    startProcessLocked(app, <span class="string">"link fail"</span>, processName);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">AppDeathRecipient</span> <span class="keyword">implements</span> <span class="title">IBinder</span>.<span class="title">DeathRecipient</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> ProcessRecord mApp;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> mPid;</div><div class="line">    <span class="keyword">final</span> IApplicationThread mAppThread;</div><div class="line"></div><div class="line">    AppDeathRecipient(ProcessRecord app, <span class="keyword">int</span> pid,</div><div class="line">            IApplicationThread thread) &#123;</div><div class="line">        <span class="keyword">if</span> (DEBUG_ALL) Slog.v(</div><div class="line">            TAG, <span class="string">"New death recipient "</span> + <span class="keyword">this</span></div><div class="line">            + <span class="string">" for thread "</span> + thread.asBinder());</div><div class="line">        mApp = app;</div><div class="line">        mPid = pid;</div><div class="line">        mAppThread = thread;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">binderDied</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (DEBUG_ALL) Slog.v(</div><div class="line">            TAG, <span class="string">"Death received in "</span> + <span class="keyword">this</span></div><div class="line">            + <span class="string">" for thread "</span> + mAppThread.asBinder());</div><div class="line">        <span class="keyword">synchronized</span>(ActivityManagerService.<span class="keyword">this</span>) &#123;</div><div class="line">            appDiedLocked(mApp, mPid, mAppThread, <span class="keyword">true</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>appDiedLocked()中调用handleAppDiedLocked()，handleAppDiedLocked()中执行到cleanUpApplicationRecordLocked()时会判断是不是persistent应用的进程：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">appDiedLocked</span><span class="params">(ProcessRecord app, <span class="keyword">int</span> pid, IApplicationThread thread,</span></span></div><div class="line">            <span class="keyword">boolean</span> fromBinderDied) &#123;</div><div class="line">            .......</div><div class="line">            handleAppDiedLocked(app, <span class="keyword">false</span>, <span class="keyword">true</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">handleAppDiedLocked</span><span class="params">(ProcessRecord app,</span></span></div><div class="line">        <span class="keyword">boolean</span> restarting, <span class="keyword">boolean</span> allowRestart) &#123;</div><div class="line">    <span class="keyword">boolean</span> kept = cleanUpApplicationRecordLocked(app, restarting, allowRestart, -<span class="number">1</span>,</div><div class="line">    <span class="keyword">false</span> <span class="comment">/*replacingPid*/</span>);</div><div class="line">    ......</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">cleanUpApplicationRecordLocked</span><span class="params">(ProcessRecord app,</span></span></div><div class="line">        <span class="keyword">boolean</span> restarting, <span class="keyword">boolean</span> allowRestart, <span class="keyword">int</span> index, <span class="keyword">boolean</span> replacingPid) &#123;</div><div class="line">    ......</div><div class="line">    <span class="keyword">if</span> (!app.persistent || app.isolated) &#123;</div><div class="line">        <span class="keyword">if</span> (DEBUG_PROCESSES || DEBUG_CLEANUP) Slog.v(TAG_CLEANUP,</div><div class="line">                <span class="string">"Removing non-persistent process during cleanup: "</span> + app);</div><div class="line">        <span class="keyword">if</span> (!replacingPid) &#123;</div><div class="line">            removeProcessNameLocked(app.processName, app.uid, app);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mHeavyWeightProcess == app) &#123;</div><div class="line">            mHandler.sendMessage(mHandler.obtainMessage(CANCEL_HEAVY_NOTIFICATION_MSG,</div><div class="line">                    mHeavyWeightProcess.userId, <span class="number">0</span>));</div><div class="line">            mHeavyWeightProcess = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!app.removed) &#123;</div><div class="line">        <span class="comment">// This app is persistent, so we need to keep its record around.</span></div><div class="line">        <span class="comment">// If it is not already on the pending app list, add it there</span></div><div class="line">        <span class="comment">// and start a new process for it.</span></div><div class="line">        <span class="keyword">if</span> (mPersistentStartingProcesses.indexOf(app) &lt; <span class="number">0</span>) &#123;</div><div class="line">            mPersistentStartingProcesses.add(app);</div><div class="line">            restart = <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ......</div><div class="line">    <span class="keyword">if</span> (restart &amp;&amp; !app.isolated) &#123;</div><div class="line">        <span class="comment">// We have components that still need to be running in the</span></div><div class="line">        <span class="comment">// process, so re-launch it.</span></div><div class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span>) &#123;</div><div class="line">            ProcessList.remove(app.pid);</div><div class="line">        &#125;</div><div class="line">        addProcessNameLocked(app);</div><div class="line">        startProcessLocked(app, <span class="string">"restart"</span>, app.processName);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上关于persistent APP可以自启和“保活”的原理就差不多清楚了，但是，我们得回到最初的问题：具有persistent特性的APP，把业务逻辑都放到Application中去做，不启动Service这样到底是否可行？潜意识里觉得这是最基本的常识，可是要拿出具体原因的时候却没办法讲事实摆道理。不能只靠直觉吧，虽然搞了这么多年Android还是学术不精啊。利用今天的空闲时间大概查阅了一下developer guide里说进程和生命周期的时候有提到过。</p>
+<h2 id="Android进程和生命周期（与组件的关系）"><a href="#Android进程和生命周期（与组件的关系）" class="headerlink" title="Android进程和生命周期（与组件的关系）"></a>Android进程和生命周期（与组件的关系）</h2><p>这部分内容来自<a href="https://developer.android.com/guide/components/activities/process-lifecycle" target="_blank" rel="external">https://developer.android.com/guide/components/activities/process-lifecycle</a><br>各位可自行查看，摘出几个关键点和大家分享一下：</p>
+<blockquote>
+<p>It is important that application developers understand how different application components (in particular Activity, Service, and BroadcastReceiver) impact the lifetime of the application’s process. Not using these components correctly can result in the system killing the application’s process while it is doing important work.</p>
+</blockquote>
+<p>一个应用的进程存活与否一定是与它的组件（尤其是Activity、Service、BroadcastReceiver）息息相关的，是这些组件影响着进程的优先级，以便告诉System在什么条件下是否可以杀掉这个进程。</p>
+<blockquote>
+<p>A common example of a process life-cycle bug is a BroadcastReceiver that starts a thread when it receives an Intent in its BroadcastReceiver.onReceive() method, and then returns from the function. Once it returns, the system considers the BroadcastReceiver to be no longer active, and thus, its hosting process no longer needed (unless other application components are active in it). So, the system may kill the process at any time to reclaim memory, and in doing so, it terminates the spawned thread running in the process. The solution to this problem is typically to schedule a JobService from the BroadcastReceiver, so the system knows that there is still active work being done in the process.</p>
+</blockquote>
+<p>这里举了一个例子，如果在BroadcastReceiver onReceive方法中启动一个线程做一件耗时操作，但是onReceive方法很快返回了，系统就认为BroadcastReceiver已经不是活跃状态了，假设这个进程其它组件也没有活跃，系统就很可能在需要时把你干掉，即便是那个线程还没有结束。</p>
+<p>由此可见，不使用组件，而在Application里处理所有的业务逻辑是不靠谱的，特别是对于一个第三方APP。<br>但是上述规则不知是不是仅仅为第三方APP这种“合法公民”制定的，对于persistent的System APP 这类“皇亲国戚”是否就不适用了？所以这部分疑惑还没真正解开，等有时间再系统地RTFSC，验证一下“猜想”吧。大家有什么想法或者经验也希望能不吝赐教。</p>
+<p>另外，今天看我这个进程的oom_adj时发现是-14，这个很诡异，Android7.0之前 PERSISTENT_PROC_ADJ 的值应该是-12，但是看Android O的源码 ProcessList.PERSISTENT_PROC_ADJ 的值是-800啊，这个-14是什么鬼？？</p>
+<p>还是得从源码中仔细去找答案。改天吧，先去吃饭了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tech</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">persistent</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/tech//" class="article-tag-list-link color5">tech</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/09/persistent/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-《寻梦环游记》和《清风亭》" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1018,99 +1137,6 @@
 
 
   
-    <article id="post-絮叨两句" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/28/絮叨两句/">絮叨两句</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/28/絮叨两句/" class="archive-article-date">
-  	<time datetime="2017-03-28T01:05:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://img2.ctoutiao.com/uploads/2015/08/4c034_20150822114469056905.jpg" alt="bjaqgs"></p>
-<p>最近工作几多不顺</p>
-<p>那天看着父亲在楼下买菜</p>
-        
-          <a class="article-more-a" href="/2017/03/28/絮叨两句/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">愤世</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/28/絮叨两句/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1125,7 +1151,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 郭效江
+    		&copy; 2019 郭效江
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1212,15 +1238,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">搬运</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
               </li>
              
               <li class="article-tag-list-item">
