@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>persistent-持久应用的那些事儿 | 郭效江</title>
+  <title>Persistent-持久应用的那些事儿 | 郭效江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实现还是经过测试验证整个流程没问题的。询问">
+  <meta name="description" content="Persistent-持久应用的那些事儿组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实">
 <meta name="keywords" content="tech,persistent">
 <meta property="og:type" content="article">
-<meta property="og:title" content="persistent-持久应用的那些事儿">
+<meta property="og:title" content="Persistent-持久应用的那些事儿">
 <meta property="og:url" content="http://yoursite.com/2019/03/09/persistent/index.html">
 <meta property="og:site_name" content="郭效江">
-<meta property="og:description" content="组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实现还是经过测试验证整个流程没问题的。询问">
+<meta property="og:description" content="Persistent-持久应用的那些事儿组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实">
 <meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/guoxiaojiang.github.io/master/img/android-boot.png">
-<meta property="og:updated_time" content="2019-03-09T12:01:59.031Z">
+<meta property="og:updated_time" content="2019-03-09T12:04:41.450Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="persistent-持久应用的那些事儿">
-<meta name="twitter:description" content="组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实现还是经过测试验证整个流程没问题的。询问">
+<meta name="twitter:title" content="Persistent-持久应用的那些事儿">
+<meta name="twitter:description" content="Persistent-持久应用的那些事儿组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/guoxiaojiang/guoxiaojiang.github.io/master/img/android-boot.png">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      persistent-持久应用的那些事儿
+      Persistent-持久应用的那些事儿
     </h1>
   
 
@@ -198,7 +198,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。<br>Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实现还是经过测试验证整个流程没问题的。询问了作者时候发现这一切都是因为在AndroidManifest清单文件的application 设置了:<br><code>android:persistent=&quot;true&quot;</code><br>这个看起来很牛逼的东西之前没有用到过，是因为之前做的都是第三方APP，用也白用。现在我们做系统级应用，就可以开心的使用了。使用之后的效果就是，在系统开机的时候此应用的进程会被自动唤醒，并执行到Application的onCreate中。所以以上代码实现和效果就解释得通了。<br>但是心中的疑惑远远没有被释然，直觉告诉我，这么做是不合理的，所有的业务在Application中就做了，那Android设计的所谓“四大组件”岂不是对于我们这种APP形同虚设？带着各种疑惑，去查看了一下Android官方的文档，并且，RTFSC。现在尝试把过程记录一下（但并不代表疑惑都解除了）</p>
+        <h1 id="Persistent-持久应用的那些事儿"><a href="#Persistent-持久应用的那些事儿" class="headerlink" title="Persistent-持久应用的那些事儿"></a>Persistent-持久应用的那些事儿</h1><p>组内有一个项目，需求是开机就启动，初始化参数，并监听一些诸如BLE、车身信号、云端push等事件，trigger对应的business logics。<br>Review代码时，发现作者将所有的代码实现一股脑放到了Application的onCreate中，No Activity, No Servcie, Nothing but Application.关键是这些实现还是经过测试验证整个流程没问题的。询问了作者时候发现这一切都是因为在AndroidManifest清单文件的application 设置了:<br><code>android:persistent=&quot;true&quot;</code><br>这个看起来很牛逼的东西之前没有用到过，是因为之前做的都是第三方APP，用也白用。现在我们做系统级应用，就可以开心的使用了。使用之后的效果就是，在系统开机的时候此应用的进程会被自动唤醒，并执行到Application的onCreate中。所以以上代码实现和效果就解释得通了。<br>但是心中的疑惑远远没有被释然，直觉告诉我，这么做是不合理的，所有的业务在Application中就做了，那Android设计的所谓“四大组件”岂不是对于我们这种APP形同虚设？带着各种疑惑，去查看了一下Android官方的文档，并且，RTFSC。现在尝试把过程记录一下（但并不代表疑惑都解除了）<br><a id="more"></a></p>
 <h2 id="persistent"><a href="#persistent" class="headerlink" title="persistent"></a>persistent</h2><p>顾名思义，有persistent加持的应用是“永久的”、“持久的”，对我们APP的试验也证明了这一点，在开机很早的时候就启动了这个进程，并且此进程被kill掉之后会顽固地再次起来。官方对此标签解释如下：</p>
 <blockquote>
 <p>android:persistent<br>Whether or not the application should remain running at all times — “true” if it should, and “false” if not. The default value is “false”. Applications should not normally set this flag; persistence mode is intended only for certain system applications.</p>
@@ -494,6 +494,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
               </li>
              
@@ -502,19 +506,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
             
             <div class="clearfix"></div>
