@@ -196,8 +196,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="入口Activity：com-android-settings-Settings，继承自SettingsActivity"><a href="#入口Activity：com-android-settings-Settings，继承自SettingsActivity" class="headerlink" title="入口Activity：com.android.settings.Settings，继承自SettingsActivity"></a>入口Activity：com.android.settings.Settings，继承自SettingsActivity</h4><p>Settings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有答案</p>
-<h4 id="SettingsActivity"><a href="#SettingsActivity" class="headerlink" title="SettingsActivity"></a>SettingsActivity</h4><p>起点和重点就在这个类：<br>SettingsActivity extends SettingsDrawerActivity<br>从onCreate说起：</p>
+        <h5 id="入口Activity：com-android-settings-Settings，继承自SettingsActivity"><a href="#入口Activity：com-android-settings-Settings，继承自SettingsActivity" class="headerlink" title="入口Activity：com.android.settings.Settings，继承自SettingsActivity"></a>入口Activity：com.android.settings.Settings，继承自SettingsActivity</h5><p>Settings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有答案</p>
+<h5 id="SettingsActivity"><a href="#SettingsActivity" class="headerlink" title="SettingsActivity"></a>SettingsActivity</h5><p>起点和重点就在这个类：<br>SettingsActivity extends SettingsDrawerActivity<br>从onCreate说起：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedState);</div><div class="line">      <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"></div><div class="line">      <span class="comment">//得到的工厂类实例为com.android.settings.overlay.FeatureFactoryImpl，是在config.xml文件中配置的</span></div><div class="line">      <span class="keyword">final</span> FeatureFactory factory = FeatureFactory.getFactory(<span class="keyword">this</span>);</div><div class="line"></div><div class="line"></div><div class="line">      <span class="comment">//factory实际是一个单例，所以以下的provider实际是作用在整个Setting App的生命周期内的</span></div><div class="line">      <span class="comment">//DashboardFeatureProvider是用来获取当前设置的项目列表、处理item点击跳转等操作的</span></div><div class="line">      mDashboardFeatureProvider = factory.getDashboardFeatureProvider(<span class="keyword">this</span>);</div><div class="line">      mMetricsFeatureProvider = factory.getMetricsFeatureProvider();</div><div class="line"></div><div class="line">      <span class="comment">// 从intent中找到当前Activity在manifest的&lt;metadata&gt;中key 为 com.android.settings.FRAGMENT_CLASS的值</span></div><div class="line">      <span class="comment">// 这个值代表了当前Setting Activity的Fragment，mFragmentClass保存起来之后会用到</span></div><div class="line">      <span class="comment">// 如果是设置首页，即Settings这个Activity，那么mFragmentClass是null</span></div><div class="line">      <span class="comment">// Should happen before any call to getIntent()</span></div><div class="line">      getMetaData();</div><div class="line"></div><div class="line">......</div><div class="line"></div><div class="line">      <span class="comment">//当在首页时，mIsShowingDashboard为ture，布局为R.layout.settings_main_dashboard</span></div><div class="line">      setContentView(mIsShowingDashboard ?</div><div class="line">              R.layout.settings_main_dashboard : R.layout.settings_main_prefs);</div><div class="line"></div><div class="line">......</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (savedState != <span class="keyword">null</span>) &#123;</div><div class="line">......</div><div class="line"></div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="comment">//在首页时显示的Fragment是DashboardSummary</span></div><div class="line">          launchSettingFragment(initialFragmentName, isSubSettings, intent);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (mIsShowingDashboard) &#123;</div><div class="line">      	<span class="comment">//在设置的首页顶部是搜索栏</span></div><div class="line">          findViewById(R.id.search_bar).setVisibility(View.VISIBLE);</div><div class="line">          findViewById(R.id.action_bar).setVisibility(View.GONE);</div><div class="line">          Toolbar toolbar = findViewById(R.id.search_action_bar);</div><div class="line">          toolbar.setOnClickListener(<span class="keyword">this</span>);</div><div class="line">          setActionBar(toolbar);</div><div class="line">	......</div><div class="line">      &#125;</div><div class="line">......</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
         
           <a class="article-more-a" href="/2019/04/29/original_settings/#more">more >></a>
@@ -1211,19 +1211,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tech</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tech</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">settings</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1239,11 +1239,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
               </li>
             
             <div class="clearfix"></div>
