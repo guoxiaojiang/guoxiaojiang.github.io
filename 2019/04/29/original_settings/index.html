@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 随笔 | 郭效江</title>
+  <title>original settings(based on Android 8.1.0) | 郭效江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="stay hungry stay foolish">
-<meta property="og:type" content="website">
-<meta property="og:title" content="郭效江">
-<meta property="og:url" content="http://yoursite.com/tags/随笔/index.html">
+  <meta name="description" content="original settings(based on Android 8.1.0)入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有">
+<meta name="keywords" content="tech,settings">
+<meta property="og:type" content="article">
+<meta property="og:title" content="original settings(based on Android 8.1.0)">
+<meta property="og:url" content="http://yoursite.com/2019/04/29/original_settings/index.html">
 <meta property="og:site_name" content="郭效江">
-<meta property="og:description" content="stay hungry stay foolish">
+<meta property="og:description" content="original settings(based on Android 8.1.0)入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有">
+<meta property="og:updated_time" content="2019-04-29T09:44:21.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="郭效江">
-<meta name="twitter:description" content="stay hungry stay foolish">
+<meta name="twitter:title" content="original settings(based on Android 8.1.0)">
+<meta name="twitter:description" content="original settings(based on Android 8.1.0)入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
   
@@ -174,232 +176,201 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-original_settings" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/02/《寻梦环游记》和《清风亭》/" class="archive-article-date">
-  	<time datetime="2018-04-02T04:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/02/《寻梦环游记》和《清风亭》/">《寻梦环游记》和《清风亭》</a>
+    <h1 class="article-title" itemprop="name">
+      original settings(based on Android 8.1.0)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/04/29/original_settings/" class="archive-article-date">
+  	<time datetime="2019-04-29T09:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="original-settings-based-on-Android-8-1-0"><a href="#original-settings-based-on-Android-8-1-0" class="headerlink" title="original settings(based on Android 8.1.0)"></a>original settings(based on Android 8.1.0)</h1><h5 id="入口Activity：com-android-settings-Settings，继承自SettingsActivity"><a href="#入口Activity：com-android-settings-Settings，继承自SettingsActivity" class="headerlink" title="入口Activity：com.android.settings.Settings，继承自SettingsActivity"></a>入口Activity：com.android.settings.Settings，继承自SettingsActivity</h5><p>Settings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有答案</p>
+<h5 id="SettingsActivity"><a href="#SettingsActivity" class="headerlink" title="SettingsActivity"></a>SettingsActivity</h5><p>起点和重点就在这个类：<br>SettingsActivity extends SettingsDrawerActivity<br>从onCreate说起：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedState);</div><div class="line">      <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"></div><div class="line">      <span class="comment">//得到的工厂类实例为com.android.settings.overlay.FeatureFactoryImpl，是在config.xml文件中配置的</span></div><div class="line">      <span class="keyword">final</span> FeatureFactory factory = FeatureFactory.getFactory(<span class="keyword">this</span>);</div><div class="line"></div><div class="line"></div><div class="line">      <span class="comment">//factory实际是一个单例，所以以下的provider实际是作用在整个Setting App的生命周期内的</span></div><div class="line">      <span class="comment">//DashboardFeatureProvider是用来获取当前设置的项目列表、处理item点击跳转等操作的</span></div><div class="line">      mDashboardFeatureProvider = factory.getDashboardFeatureProvider(<span class="keyword">this</span>);</div><div class="line">      mMetricsFeatureProvider = factory.getMetricsFeatureProvider();</div><div class="line"></div><div class="line">      <span class="comment">// 从intent中找到当前Activity在manifest的&lt;metadata&gt;中key 为 com.android.settings.FRAGMENT_CLASS的值</span></div><div class="line">      <span class="comment">// 这个值代表了当前Setting Activity的Fragment，mFragmentClass保存起来之后会用到</span></div><div class="line">      <span class="comment">// 如果是设置首页，即Settings这个Activity，那么mFragmentClass是null</span></div><div class="line">      <span class="comment">// Should happen before any call to getIntent()</span></div><div class="line">      getMetaData();</div><div class="line"></div><div class="line">......</div><div class="line"></div><div class="line">      <span class="comment">//当在首页时，mIsShowingDashboard为ture，布局为R.layout.settings_main_dashboard</span></div><div class="line">      setContentView(mIsShowingDashboard ?</div><div class="line">              R.layout.settings_main_dashboard : R.layout.settings_main_prefs);</div><div class="line"></div><div class="line">......</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (savedState != <span class="keyword">null</span>) &#123;</div><div class="line">......</div><div class="line"></div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="comment">//在首页时显示的Fragment是DashboardSummary</span></div><div class="line">          launchSettingFragment(initialFragmentName, isSubSettings, intent);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (mIsShowingDashboard) &#123;</div><div class="line">      	<span class="comment">//在设置的首页顶部是搜索栏</span></div><div class="line">          findViewById(R.id.search_bar).setVisibility(View.VISIBLE);</div><div class="line">          findViewById(R.id.action_bar).setVisibility(View.GONE);</div><div class="line">          Toolbar toolbar = findViewById(R.id.search_action_bar);</div><div class="line">          toolbar.setOnClickListener(<span class="keyword">this</span>);</div><div class="line">          setActionBar(toolbar);</div><div class="line">	......</div><div class="line">      &#125;</div><div class="line">......</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>回答上面的一个问题，Settings中的静态内部类，比如BluetoothSettingsActivity等，每个都是在Manifest中注册的一个Activity，它们都完全以依赖父类SettingsActivity的实现，之所以这样做就是为了给Manifest清单文件中提供不同的Activity的类名，并且在首页Settings的DashboardSummary中的RecyclerView中每个item点击时跳转到对应的Activity.</p>
+<h5 id="FallbackHome"><a href="#FallbackHome" class="headerlink" title="FallbackHome"></a>FallbackHome</h5><h5 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h5><p>FirmwareVersionPreferenceController 中handlePreferenceTreeClick 处理的，如果在500ms之内点了三次，则跳入彩蛋页面。是这样实现的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">long</span>[] mHits = <span class="keyword">new</span> <span class="keyword">long</span>[<span class="number">3</span>];</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handlePreferenceTreeClick</span><span class="params">(Preference preference)</span> </span>&#123;</div><div class="line">     ......</div><div class="line">     System.arraycopy(mHits, <span class="number">1</span>, mHits, <span class="number">0</span>, mHits.length - <span class="number">1</span>);</div><div class="line">     mHits[mHits.length - <span class="number">1</span>] = SystemClock.uptimeMillis();</div><div class="line">     <span class="keyword">if</span> (mHits[<span class="number">0</span>] &gt;= (SystemClock.uptimeMillis() - <span class="number">500</span>)) &#123;</div><div class="line">......</div><div class="line"></div><div class="line">         <span class="keyword">final</span> Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_MAIN)</div><div class="line">                 .setClassName(</div><div class="line">                         <span class="string">"android"</span>, com.android.internal.app.PlatLogoActivity.class.getName());</div><div class="line">         <span class="keyword">try</span> &#123;</div><div class="line">             mContext.startActivity(intent);</div><div class="line">             <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">         &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">             Log.e(TAG, <span class="string">"Unable to start activity "</span> + intent.toString());</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>PlatLogoActivity中就放了一张名为 platlogo的矢量图。这还没完，如果点击五次之后再长按这张奥利奥图片，则进入另外一个彩蛋页，这个Activity经搜索是在一个叫做EasterEgg的单独项目中(com.android.egg.octo.Ocquarium Actrivity)：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">im.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">           <span class="meta">@Override</span></div><div class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">               im.setOnLongClickListener(<span class="keyword">new</span> View.OnLongClickListener() &#123;</div><div class="line">                   <span class="meta">@Override</span></div><div class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onLongClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                       <span class="keyword">if</span> (mTapCount &lt; <span class="number">5</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line"></div><div class="line">                       <span class="keyword">final</span> ContentResolver cr = getContentResolver();</div><div class="line">                       <span class="keyword">if</span> (Settings.System.getLong(cr, Settings.System.EGG_MODE, <span class="number">0</span>)</div><div class="line">                               == <span class="number">0</span>) &#123;</div><div class="line">                           <span class="comment">// For posterity: the moment this user unlocked the easter egg</span></div><div class="line">                           <span class="comment">//也不知道这里记录第一次激活复活节彩蛋是为啥。</span></div><div class="line">                           <span class="comment">//for posterity???</span></div><div class="line">                           <span class="keyword">try</span> &#123;</div><div class="line">                               Settings.System.putLong(cr,</div><div class="line">                                       Settings.System.EGG_MODE,</div><div class="line">                                       System.currentTimeMillis());</div><div class="line">                           &#125; <span class="keyword">catch</span> (RuntimeException e) &#123;</div><div class="line">                               Log.e(<span class="string">"PlatLogoActivity"</span>, <span class="string">"Can't write settings"</span>, e);</div><div class="line">                           &#125;</div><div class="line">                       &#125;</div><div class="line">                       im.post(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">                           <span class="meta">@Override</span></div><div class="line">                           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                               <span class="keyword">try</span> &#123;</div><div class="line">                                   startActivity(<span class="keyword">new</span> Intent(Intent.ACTION_MAIN)</div><div class="line">                                           .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK</div><div class="line">                                                   | Intent.FLAG_ACTIVITY_CLEAR_TASK</div><div class="line">                                                   | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)</div><div class="line">                                           .addCategory(<span class="string">"com.android.internal.category.PLATLOGO"</span>));</div><div class="line">                               &#125; <span class="keyword">catch</span> (ActivityNotFoundException ex) &#123;</div><div class="line">                                   Log.e(<span class="string">"PlatLogoActivity"</span>, <span class="string">"No more eggs."</span>);</div><div class="line">                               &#125;</div><div class="line">                               <span class="keyword">if</span> (FINISH) finish();</div><div class="line">                           &#125;</div><div class="line">                       &#125;);</div><div class="line">                       <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                   &#125;</div><div class="line">               &#125;);</div><div class="line">               mTapCount++;</div><div class="line">           &#125;</div><div class="line">       &#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".octo.Ocquarium"</span></span></div><div class="line">           <span class="attr">android:theme</span>=<span class="string">"@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen"</span></div><div class="line">           <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span>&gt;</div><div class="line">           <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span>/&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"com.android.internal.category.PLATLOGO"</span> /&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://github.com/guoxiaojiang/hello-word/raw/master/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://github.com/guoxiaojiang/hello-word/raw/master/WX20170505.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/01/tinker的一个注释/" class="archive-article-date">
-  	<time datetime="2018-02-01T09:05:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/01/tinker的一个注释/">tinker的一个注释</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/04/来碗米国浓鸡汤/" class="archive-article-date">
-  	<time datetime="2017-05-04T10:20:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/04/来碗米国浓鸡汤/">来碗米国浓鸡汤</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/28/絮叨两句/" class="archive-article-date">
-  	<time datetime="2017-03-28T01:05:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/28/絮叨两句/">絮叨两句</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tech</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">愤世</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">settings</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        			<a href="/categories/tech//" class="article-tag-list-link color5">tech</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/29/original_settings/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/03/09/persistent/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Persistent-持久应用的那些事儿</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -422,9 +393,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
