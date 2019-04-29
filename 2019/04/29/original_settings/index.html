@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>original settings(based on Android 8.1.0) | 郭效江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="original settings(based on Android 8.1.0)入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有">
+  <meta name="description" content="入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有答案 SettingsActivity起点和重点就在这个类：SettingsAct">
 <meta name="keywords" content="tech,settings">
 <meta property="og:type" content="article">
 <meta property="og:title" content="original settings(based on Android 8.1.0)">
 <meta property="og:url" content="http://yoursite.com/2019/04/29/original_settings/index.html">
 <meta property="og:site_name" content="郭效江">
-<meta property="og:description" content="original settings(based on Android 8.1.0)入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有">
-<meta property="og:updated_time" content="2019-04-29T09:44:21.330Z">
+<meta property="og:description" content="入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有答案 SettingsActivity起点和重点就在这个类：SettingsAct">
+<meta property="og:updated_time" content="2019-04-29T09:46:47.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="original settings(based on Android 8.1.0)">
-<meta name="twitter:description" content="original settings(based on Android 8.1.0)入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有">
+<meta name="twitter:description" content="入口Activity：com.android.settings.Settings，继承自SettingsActivitySettings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有答案 SettingsActivity起点和重点就在这个类：SettingsAct">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
   
@@ -196,12 +196,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="original-settings-based-on-Android-8-1-0"><a href="#original-settings-based-on-Android-8-1-0" class="headerlink" title="original settings(based on Android 8.1.0)"></a>original settings(based on Android 8.1.0)</h1><h5 id="入口Activity：com-android-settings-Settings，继承自SettingsActivity"><a href="#入口Activity：com-android-settings-Settings，继承自SettingsActivity" class="headerlink" title="入口Activity：com.android.settings.Settings，继承自SettingsActivity"></a>入口Activity：com.android.settings.Settings，继承自SettingsActivity</h5><p>Settings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有答案</p>
-<h5 id="SettingsActivity"><a href="#SettingsActivity" class="headerlink" title="SettingsActivity"></a>SettingsActivity</h5><p>起点和重点就在这个类：<br>SettingsActivity extends SettingsDrawerActivity<br>从onCreate说起：</p>
+        <h4 id="入口Activity：com-android-settings-Settings，继承自SettingsActivity"><a href="#入口Activity：com-android-settings-Settings，继承自SettingsActivity" class="headerlink" title="入口Activity：com.android.settings.Settings，继承自SettingsActivity"></a>入口Activity：com.android.settings.Settings，继承自SettingsActivity</h4><p>Settings这个类中声明了一系列继承自SettingsActivity的静态内部类，比如 BluetoothSettingsActivity，除此之外，声明都没干， 这些类都是干什么用？后面会有答案</p>
+<h4 id="SettingsActivity"><a href="#SettingsActivity" class="headerlink" title="SettingsActivity"></a>SettingsActivity</h4><p>起点和重点就在这个类：<br>SettingsActivity extends SettingsDrawerActivity<br>从onCreate说起：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedState);</div><div class="line">      <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"></div><div class="line">      <span class="comment">//得到的工厂类实例为com.android.settings.overlay.FeatureFactoryImpl，是在config.xml文件中配置的</span></div><div class="line">      <span class="keyword">final</span> FeatureFactory factory = FeatureFactory.getFactory(<span class="keyword">this</span>);</div><div class="line"></div><div class="line"></div><div class="line">      <span class="comment">//factory实际是一个单例，所以以下的provider实际是作用在整个Setting App的生命周期内的</span></div><div class="line">      <span class="comment">//DashboardFeatureProvider是用来获取当前设置的项目列表、处理item点击跳转等操作的</span></div><div class="line">      mDashboardFeatureProvider = factory.getDashboardFeatureProvider(<span class="keyword">this</span>);</div><div class="line">      mMetricsFeatureProvider = factory.getMetricsFeatureProvider();</div><div class="line"></div><div class="line">      <span class="comment">// 从intent中找到当前Activity在manifest的&lt;metadata&gt;中key 为 com.android.settings.FRAGMENT_CLASS的值</span></div><div class="line">      <span class="comment">// 这个值代表了当前Setting Activity的Fragment，mFragmentClass保存起来之后会用到</span></div><div class="line">      <span class="comment">// 如果是设置首页，即Settings这个Activity，那么mFragmentClass是null</span></div><div class="line">      <span class="comment">// Should happen before any call to getIntent()</span></div><div class="line">      getMetaData();</div><div class="line"></div><div class="line">......</div><div class="line"></div><div class="line">      <span class="comment">//当在首页时，mIsShowingDashboard为ture，布局为R.layout.settings_main_dashboard</span></div><div class="line">      setContentView(mIsShowingDashboard ?</div><div class="line">              R.layout.settings_main_dashboard : R.layout.settings_main_prefs);</div><div class="line"></div><div class="line">......</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (savedState != <span class="keyword">null</span>) &#123;</div><div class="line">......</div><div class="line"></div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="comment">//在首页时显示的Fragment是DashboardSummary</span></div><div class="line">          launchSettingFragment(initialFragmentName, isSubSettings, intent);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (mIsShowingDashboard) &#123;</div><div class="line">      	<span class="comment">//在设置的首页顶部是搜索栏</span></div><div class="line">          findViewById(R.id.search_bar).setVisibility(View.VISIBLE);</div><div class="line">          findViewById(R.id.action_bar).setVisibility(View.GONE);</div><div class="line">          Toolbar toolbar = findViewById(R.id.search_action_bar);</div><div class="line">          toolbar.setOnClickListener(<span class="keyword">this</span>);</div><div class="line">          setActionBar(toolbar);</div><div class="line">	......</div><div class="line">      &#125;</div><div class="line">......</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>回答上面的一个问题，Settings中的静态内部类，比如BluetoothSettingsActivity等，每个都是在Manifest中注册的一个Activity，它们都完全以依赖父类SettingsActivity的实现，之所以这样做就是为了给Manifest清单文件中提供不同的Activity的类名，并且在首页Settings的DashboardSummary中的RecyclerView中每个item点击时跳转到对应的Activity.</p>
-<h5 id="FallbackHome"><a href="#FallbackHome" class="headerlink" title="FallbackHome"></a>FallbackHome</h5><h5 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h5><p>FirmwareVersionPreferenceController 中handlePreferenceTreeClick 处理的，如果在500ms之内点了三次，则跳入彩蛋页面。是这样实现的：</p>
+<h4 id="FallbackHome"><a href="#FallbackHome" class="headerlink" title="FallbackHome"></a>FallbackHome</h4><p>//TODO</p>
+<h4 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h4><p>FirmwareVersionPreferenceController 中handlePreferenceTreeClick 处理的，如果在500ms之内点了三次，则跳入彩蛋页面。是这样实现的：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">long</span>[] mHits = <span class="keyword">new</span> <span class="keyword">long</span>[<span class="number">3</span>];</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handlePreferenceTreeClick</span><span class="params">(Preference preference)</span> </span>&#123;</div><div class="line">     ......</div><div class="line">     System.arraycopy(mHits, <span class="number">1</span>, mHits, <span class="number">0</span>, mHits.length - <span class="number">1</span>);</div><div class="line">     mHits[mHits.length - <span class="number">1</span>] = SystemClock.uptimeMillis();</div><div class="line">     <span class="keyword">if</span> (mHits[<span class="number">0</span>] &gt;= (SystemClock.uptimeMillis() - <span class="number">500</span>)) &#123;</div><div class="line">......</div><div class="line"></div><div class="line">         <span class="keyword">final</span> Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_MAIN)</div><div class="line">                 .setClassName(</div><div class="line">                         <span class="string">"android"</span>, com.android.internal.app.PlatLogoActivity.class.getName());</div><div class="line">         <span class="keyword">try</span> &#123;</div><div class="line">             mContext.startActivity(intent);</div><div class="line">             <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">         &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">             Log.e(TAG, <span class="string">"Unable to start activity "</span> + intent.toString());</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 <p>PlatLogoActivity中就放了一张名为 platlogo的矢量图。这还没完，如果点击五次之后再长按这张奥利奥图片，则进入另外一个彩蛋页，这个Activity经搜索是在一个叫做EasterEgg的单独项目中(com.android.egg.octo.Ocquarium Actrivity)：</p>
@@ -471,15 +472,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lint</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">settings</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,11 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
             
             <div class="clearfix"></div>
