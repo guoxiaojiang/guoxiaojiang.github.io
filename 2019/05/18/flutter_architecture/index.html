@@ -16,7 +16,8 @@
 <meta property="og:site_name" content="郭效江">
 <meta property="og:description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
 <meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/final.jpg">
-<meta property="og:updated_time" content="2019-05-18T09:31:41.587Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/Screenrecorder-2019-05-18-23-31-34-159.gif">
+<meta property="og:updated_time" content="2019-05-18T16:06:23.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flutter 初体验和应用架构浅析">
 <meta name="twitter:description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
@@ -217,8 +218,19 @@
 <li>遍历，转换，准备数据，然后展示给用户</li>
 <li>向数据库保存数据/从数据库获取数据</li>
 </ul>
-<p>本文将通过一个简单的从网络拉取数据并展示的例子，介绍以下几种flutter现阶段广泛使用的架构：SetState、Scoped Model、BLoC、Provider</p>
+<p>本文将通过一个简单的从网络拉取数据并展示的例子，介绍以下几种flutter现阶段广泛使用的架构：</p>
+<ul>
+<li>SetState</li>
+<li>Scoped Model</li>
+<li>BLoC</li>
+<li>Provider</li>
+</ul>
+<p>实现效果如下：</p>
+<p><img src="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/Screenrecorder-2019-05-18-23-31-34-159.gif" alt="demogif"></p>
+<h4 id="网络请求和数据封装"><a href="#网络请求和数据封装" class="headerlink" title="网络请求和数据封装"></a>网络请求和数据封装</h4><p>封装了一个Repository类，提供一个返回值为Future<citydata> 的getCityData函数，网络请求使用了<a href="https://github.com/flutterchina/dio" target="_blank" rel="external">dio</a>。关于Future以及和dart相关的详细教程可参考<a href="https://dart.dev/tutorials/language/futures" target="_blank" rel="external">这里</a></citydata></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Repository</span> </span>&#123;</div><div class="line"></div><div class="line">  Future&lt;CityData&gt; getCityData() <span class="keyword">async</span> &#123;</div><div class="line">    <span class="keyword">const</span> url = <span class="string">"https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/testdata.json"</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      Response response = <span class="keyword">await</span> Dio().<span class="keyword">get</span>(url);</div><div class="line">      <span class="built_in">String</span> cityDataStr = response.data.toString();</div><div class="line">      <span class="keyword">final</span> jsonMap = json.decode(cityDataStr);</div><div class="line">      CityData cityData = CityData.fromJson(jsonMap);</div><div class="line">      <span class="keyword">return</span> cityData;</div><div class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">      <span class="built_in">print</span>(e);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="SetState"><a href="#SetState" class="headerlink" title="SetState"></a>SetState</h3><p>在<a href="https://medium.com/flutter-community/flutter-app-architecture-101-vanilla-scoped-model-bloc-7eff7b2baf7e?FGa=true" target="_blank" rel="external">Flutter app architecture 101: Vanilla, Scoped Model, BLoC</a>文章中把它叫做”Vanilla”，它也是用AS等IDE新建一个Flutter项目时，默认生成的演示代码中在使用的一种方式，简单来说，就是当数据来时，刷新用户可见的那个root widget，它会遍历地刷新每一个children。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SetStatePage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</div><div class="line">  <span class="keyword">final</span> Repository _repository;</div><div class="line"></div><div class="line">  SetStatePage(<span class="keyword">this</span>._repository);</div><div class="line"></div><div class="line">  <span class="meta">@override</span></div><div class="line">  State&lt;StatefulWidget&gt; createState() &#123;</div><div class="line">    <span class="keyword">return</span> _SetStatePageState();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">_SetStatePageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">SetStatePage</span>&gt; </span>&#123;</div><div class="line">  <span class="built_in">bool</span> _isLoading = <span class="keyword">false</span>;</div><div class="line">  CityData _cityData;</div><div class="line"></div><div class="line">  <span class="meta">@override</span></div><div class="line">  Widget build(BuildContext context) &#123;</div><div class="line">    <span class="keyword">return</span> Scaffold(</div><div class="line">      appBar: AppBar(</div><div class="line">        title: <span class="keyword">const</span> Text(<span class="string">'SetState'</span>),</div><div class="line">      ),</div><div class="line">      body: SafeArea(child: _isLoading ? _buildLoading() : _buildBody()),</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Widget _buildLoading() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">const</span> Center(</div><div class="line">      child: CircularProgressIndicator(),</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Widget _buildBody() &#123;</div><div class="line">    <span class="keyword">if</span> (_cityData != <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="keyword">return</span> _buildContent();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> _buildInit();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Widget _buildContent() &#123;</div><div class="line">    <span class="keyword">return</span> Column(</div><div class="line">      children: &lt;Widget&gt;[</div><div class="line">        Padding(</div><div class="line">          padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">8.0</span>),</div><div class="line">          child: Text(<span class="string">"山西省的城市有如下："</span>, style: TextStyle(fontSize: <span class="number">19</span>),),</div><div class="line">        ),</div><div class="line">        Expanded(</div><div class="line">          child: ListView.builder(</div><div class="line">              itemCount: _cityData.cities.length,</div><div class="line">              padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">16.0</span>),</div><div class="line">              itemBuilder: (context, index) &#123;</div><div class="line">                <span class="keyword">return</span> ListTile(</div><div class="line">                    title: Text(</div><div class="line">                  _cityData.cities[index].cityName,</div><div class="line">                  style: TextStyle(fontSize: <span class="number">18</span>),</div><div class="line">                ));</div><div class="line">              &#125;),</div><div class="line">        ),</div><div class="line">      ],</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Widget _buildInit() &#123;</div><div class="line">    <span class="keyword">return</span> Center(</div><div class="line">      child: RaisedButton(</div><div class="line">        child: <span class="keyword">const</span> Text(<span class="string">'Load cities data'</span>),</div><div class="line">        onPressed: () &#123;</div><div class="line">          <span class="comment">//凡是状态（数据）更新时，使用setState 通知当前_SetStatePageState</span></div><div class="line">          <span class="comment">//_SetStatePageState的build会被重新执行</span></div><div class="line">          <span class="comment">//所以SetStatePage当前所有的Widget都会被重绘</span></div><div class="line">          setState(() &#123;</div><div class="line">            _isLoading = <span class="keyword">true</span>;</div><div class="line">          &#125;);</div><div class="line">          widget._repository.getCityData().then((cityData) &#123;</div><div class="line">            setState(() &#123;</div><div class="line">              _cityData = cityData;</div><div class="line">              _isLoading = <span class="keyword">false</span>;</div><div class="line">            &#125;);</div><div class="line">          &#125;);</div><div class="line">        &#125;,</div><div class="line">      ),</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
 
@@ -480,27 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">flutter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -512,7 +508,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">flutter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
               </li>
             
             <div class="clearfix"></div>
