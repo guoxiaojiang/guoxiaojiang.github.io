@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>[搬运工]必知必会 | Android 性能优化的方面方面都在这儿 | 郭效江</title>
+  <title>flutter architecture | 郭效江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原创 2017-11-18 鸿洋 鸿洋  注：本文为搬运鸿洋大神公众号内容：https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ，纯粹为方便学习和参阅，感谢大神精彩的整理和总结，如有侵权，请告知  又到周六了，鸿洋的不定期的周六放送又来了~~这次来谈谈性能优化吧。大家在工作中或多或少都会拿自家的应用和竞品app做比对，不可避免的需要做一些app性能优化">
-<meta name="keywords" content="tech,搬运">
+  <meta name="description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
+<meta name="keywords" content="tech,flutter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[搬运工]必知必会 | Android 性能优化的方面方面都在这儿">
-<meta property="og:url" content="http://yoursite.com/2017/11/30/Android 性能优化的方面方面都在这儿/index.html">
+<meta property="og:title" content="flutter architecture">
+<meta property="og:url" content="http://yoursite.com/2019/05/18/flutter_architecture/index.html">
 <meta property="og:site_name" content="郭效江">
-<meta property="og:description" content="原创 2017-11-18 鸿洋 鸿洋  注：本文为搬运鸿洋大神公众号内容：https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ，纯粹为方便学习和参阅，感谢大神精彩的整理和总结，如有侵权，请告知  又到周六了，鸿洋的不定期的周六放送又来了~~这次来谈谈性能优化吧。大家在工作中或多或少都会拿自家的应用和竞品app做比对，不可避免的需要做一些app性能优化">
-<meta property="og:updated_time" content="2017-11-30T04:58:54.432Z">
+<meta property="og:description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
+<meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/final.jpg">
+<meta property="og:updated_time" content="2019-05-18T08:26:28.408Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[搬运工]必知必会 | Android 性能优化的方面方面都在这儿">
-<meta name="twitter:description" content="原创 2017-11-18 鸿洋 鸿洋  注：本文为搬运鸿洋大神公众号内容：https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ，纯粹为方便学习和参阅，感谢大神精彩的整理和总结，如有侵权，请告知  又到周六了，鸿洋的不定期的周六放送又来了~~这次来谈谈性能优化吧。大家在工作中或多或少都会拿自家的应用和竞品app做比对，不可避免的需要做一些app性能优化">
+<meta name="twitter:title" content="flutter architecture">
+<meta name="twitter:description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/final.jpg">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
   
@@ -176,117 +178,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Android 性能优化的方面方面都在这儿" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-flutter_architecture" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      [搬运工]必知必会 | Android 性能优化的方面方面都在这儿
+      flutter architecture
     </h1>
   
 
         
-        <a href="/2017/11/30/Android 性能优化的方面方面都在这儿/" class="archive-article-date">
-  	<time datetime="2017-11-30T04:52:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
+        <a href="/2019/05/18/flutter_architecture/" class="archive-article-date">
+  	<time datetime="2019-05-18T07:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>原创 2017-11-18 鸿洋 鸿洋</p>
+        <p>今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 <a href="https://developers.googleblog.com/2019/05/Flutter-io19.html" target="_blank" rel="external">https://developers.googleblog.com/2019/05/Flutter-io19.html</a><br>足以证明Google对Flutter，甚至可预见是对fuchsia寄予的厚望。</p>
+<p>其实久仰Flutter的大名了，但是由于实际项目中没有用到，一直处于观望和碎片时间阅读一下文档和demo的状态。顺便说下，个人感觉对于技术，特别是这种在国内来说算是比较新的技术，一定要读原汁原味的英文原版文档，跟别人嚼过的还是不太一样的，而且还把英文练了。我就是在地铁上通勤时间读了dart 和 flutter的官方文档，阅读英文文档其实没有想象那么难。 <a href="https://dart.dev/guides/language/language-tour" target="_blank" rel="external">dart-language-tour</a>、<a href="https://flutter.dev/docs" target="_blank" rel="external">flutter docs</a> 。今年的I/O大会详细关注了和flutter、dart相关的部分，并且小组有一个项目恰好不用集成到系统大包中，仅供给测试人员使用，所以就用了flutter来开发，所以有很多感触，今天整理一下。</p>
+<p>闲言碎语不多讲了，先说下初体验吧：</p>
+<p>首先是爽，dart的现代化语法、flutter返璞归真的思想（一切皆widget）都让人感觉爽，当然，还有官方最为津津乐道的Hot Reload。</p>
+<a id="more"></a>
+<p>再说说问题和疑惑吧：在上文说到的那个项目中，我兴致勃勃写完之后，发现很完美，所有的UI和交互都完成了，并且刻意用了一些Cupertino的Widget，发现确实比用原生的组件要漂亮。但是总感觉哪里不对。原来所有的代码都在一个文件中，UI、数据、交互都在一个叫做MyHomePage的StatefulWidget中完成了。难道真是这么玩吗？这不是在开历史倒车吗？Android实践积累出来的各种<a href="https://developer.android.com/jetpack/docs/guide" target="_blank" rel="external">架构思想</a>，MVC、MVP、MVVM、Clean等等，不就是为了将视图、数据、usecase解耦吗？难道这些最佳实践都和flutter无关？</p>
+<p>带着上述疑问，看了一些flutter的开源项目，还有一些文章，感觉之前的想法就像最开始把所有代码都堆到Activity时的想法是类似的。对了，I/0大会有一场是专门讲这个的，感觉很精彩：<a href="https://www.youtube.com/watch?v=d_m5csmrf7I" target="_blank" rel="external">Pragmatic State Management in Flutter (Google I/O’19)</a>，<br>还有这篇文章也很有帮助：<a href="https://medium.com/flutter-community/flutter-app-architecture-101-vanilla-scoped-model-bloc-7eff7b2baf7e?FGa=true" target="_blank" rel="external">Flutter app architecture 101: Vanilla, Scoped Model, BLoC</a></p>
 <blockquote>
-<p>注：本文为搬运鸿洋大神公众号内容：<a href="https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/QVOYF2nfoWMCbM5YsxQgRQ</a>，纯粹为方便学习和参阅，感谢大神精彩的整理和总结，如有侵权，请告知</p>
+<p>本文部分内容直接引述上述视频文字材料</p>
 </blockquote>
-<p>又到周六了，鸿洋的不定期的周六放送又来了~~这次来谈谈性能优化吧。大家在工作中或多或少都会拿自家的应用和竞品app做比对，不可避免的需要做一些app性能优化的活。很多时候可能是策略上的调整，不过还是有非常多的通用的方式。</p>
-<p>一般情况下，我们谈性能优化基本上会从以下几个方面：</p>
+<p>先奉上一段感觉很有道理的话：</p>
+<p><img src="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/final.jpg" alt="i/o flutter"></p>
+<p>真的算是计算机哲学了</p>
+<p>事实上，并没有一种万能的架构模式能够应对所有的产品形态和需求，但是形形色色的需求都最终不离其宗，一个典型的手机互联网产品做的事情无非是如下几种：</p>
 <ul>
-<li>App启动速度优化</li>
-<li>UI流畅度优化</li>
-<li>内存优化</li>
-<li>apk瘦身</li>
-<li>电量优化<a id="more"></a>
-还有些网络速度优化、以及特定类型app的一些针对性的优化，比如播放器起播速度等…</li>
+<li>从网络上传/下载数据</li>
+<li>遍历，转换，准备数据，然后展示给用户</li>
+<li>向数据库保存数据/从数据库获取数据</li>
 </ul>
-<p>我们重点谈论上面5个方面。</p>
-<p>性能优化正常的流程是，发现自己某方面与竞品差距比较大，比如UI渲染速度，需要通过某种方式去发现为什么比别人慢，往往需要利用一些工具，然后可以做一些针对性的调优（代码优化、实现方式改变等），当然了在调优的过程中会有一些通用性的调优方式可以帮助你。</p>
-<p>所以本文从共性的角度来看，主要介绍的就是针对以上5个方面的检测工具以及调优方式了。</p>
-<h2 id="1-App启动速度优化"><a href="#1-App启动速度优化" class="headerlink" title="1 App启动速度优化"></a>1 App启动速度优化</h2><p>对于App启动速度优化，一般情况下我们会利用主题去防止出现白屏；针对启动速度慢，需要尽可能减少Application的onCreate中所要做的事情，比如一些不重要的SDK延迟或者异步加载；多进程情况下一定要可以在onCreate中去区分进程做一些初始化工作；部分将要使用到的类异步加载；还有针对multidex专门做优化的（当然这个随着5.0以上的设备越来越多，影响倒是没有那么大了）。</p>
-<p>下面针对各个方面推荐一些文章：</p>
-<ul>
-<li>Android性能优化（一）之启动加速35%<br><a href="http://www.jianshu.com/p/f5514b1a826c" target="_blank" rel="external">http://www.jianshu.com/p/f5514b1a826c</a></li>
-<li>Android冷启动白屏解析，带你一步步分析和解决问题<br><a href="http://blog.csdn.net/guolin_blog/article/details/51019856" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/51019856</a></li>
-<li>Android APP启动优化<br><a href="http://wuxiaolong.me/2017/03/13/appStart/" target="_blank" rel="external">http://wuxiaolong.me/2017/03/13/appStart/</a></li>
-<li>App启动速度优化之耗时检测处理<br><a href="http://www.jianshu.com/p/a0e242d57360" target="_blank" rel="external">http://www.jianshu.com/p/a0e242d57360</a></li>
-</ul>
-<p>上面几篇文章基本上描述了应用的启动流程，如何优化白屏，以及一些SDK的懒加载等等…</p>
-<ul>
-<li>美团Android DEX自动拆包及动态加载简介<br><a href="https://tech.meituan.com/mt-android-auto-split-dex.html" target="_blank" rel="external">https://tech.meituan.com/mt-android-auto-split-dex.html</a></li>
-<li>Android MultiDex初次启动APP优化<br><a href="http://blog.csdn.net/synaric/article/details/53540760" target="_blank" rel="external">http://blog.csdn.net/synaric/article/details/53540760</a></li>
-<li>其实你不知道MultiDex到底有多坑<br><a href="http://t.cn/RjjhD95" target="_blank" rel="external">http://t.cn/RjjhD95</a></li>
-</ul>
-<p>这3篇可以帮助你对multidex做一定的了解，以及提供了优化方案供参考。</p>
-<p>当然了，在检测启动优化上，除了利用adb命令去检测总时间，还有就是去发现耗时的方法，可以利用TraceView，或者打开StrictMode，如果你喜欢使用Log，还可以去使用hugo，或者自己写一个类似的AOP日志框架。</p>
-<p>关于TraceView的使用可以参考：</p>
-<ul>
-<li>TraceView 简介及其案例实战<br><a href="https://www.cnblogs.com/sunzn/p/3192231.html" target="_blank" rel="external">https://www.cnblogs.com/sunzn/p/3192231.html</a></li>
-<li>使用 TraceView 找到卡顿的元凶<br><a href="http://blog.csdn.net/u011240877/article/details/54347396" target="_blank" rel="external">http://blog.csdn.net/u011240877/article/details/54347396</a></li>
-<li>Android App优化之提升你的App启动速度之实例挑战<br><a href="http://www.jianshu.com/p/4f10c9a10ac9" target="_blank" rel="external">http://www.jianshu.com/p/4f10c9a10ac9</a></li>
-</ul>
-<p>StrictMode比较简单，就不描述了，hugo是Jake大神的一个开源库，主要是利用aspectJ，源码很少，也比较简单，不过使用起来还不错，直接看readme就够了，感兴趣可以看下~</p>
-<p><a href="https://github.com/JakeWharton/hugo" target="_blank" rel="external">https://github.com/JakeWharton/hugo</a></p>
-<p>##2 UI流畅度优化</p>
-<p>谈到UI流畅度，一般就是不要在主进程去做耗时的操作，提升UI的绘制速度（减少View的布局层级，避免过渡绘制等）…TraceView、Lint、Hugo、StrictMode等…</p>
-<p>这里很容易想起Google在15年初google发布了Android性能优化典范，还好视频还被我找到了，文末有下载…</p>
-<p>对于优化方案可参考：</p>
-<ul>
-<li>Android性能优化（二）之布局优化面面观<br><a href="http://www.jianshu.com/p/4f44a178c547" target="_blank" rel="external">http://www.jianshu.com/p/4f44a178c547</a></li>
-<li>Android UI性能优化实战 识别绘制中的性能问题<br><a href="http://blog.csdn.net/lmj623565791/article/details/45556391/" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/45556391/</a></li>
-<li>性能优化之布局优化<br><a href="http://www.trinea.cn/android/layout-performance/" target="_blank" rel="external">http://www.trinea.cn/android/layout-performance/</a></li>
-<li>Android性能调优<br><a href="http://www.trinea.cn/android/android-performance-demo/" target="_blank" rel="external">http://www.trinea.cn/android/android-performance-demo/</a></li>
-</ul>
-<p>当然了对于UI卡顿，不可避免的要引入检测的方案：</p>
-<p>1、一般有监听Looper的日志<br>2、利用Choreographer</p>
-<p>可参考我之前编写的：</p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&amp;mid=2650822205&amp;idx=1&amp;sn=6b8e78bc1d71eb79a199667cf132acf7&amp;chksm=80b782a3b7c00bb5c12437556fca68136c75409855e9252e395b545621319edf23959942b67c&amp;scene=21#wechat_redirect" target="_blank" rel="external">Android UI性能优化 检测应用中的UI卡顿</a></p>
-<p>当然也相应的有一些开源工具：</p>
-<p><a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="external">https://github.com/markzhai/AndroidPerformanceMonitor [方式1]</a><br><a href="https://github.com/wasabeef/Takt" target="_blank" rel="external">https://github.com/wasabeef/Takt [方式2]</a><br><a href="https://github.com/friendlyrobotnyc/TinyDancer" target="_blank" rel="external">https://github.com/friendlyrobotnyc/TinyDancer [方式2]</a></p>
-<p>##3 内存优化</p>
-<p>内存优化那么主要就是去消除应用中的内存泄露、避免内存抖动；常用工具就是AS自带的内存检测，可以很好的发现内存抖动；leakcanary可以非常方便的帮助我们发现内存泄露；MAT可以做更多的内存分析。</p>
-<p>当然了，你还可以了解一些内存相关的基础知识。</p>
-<ul>
-<li>Android性能优化（三）之内存管理<br><a href="http://www.jianshu.com/p/c4b283848970" target="_blank" rel="external">http://www.jianshu.com/p/c4b283848970</a></li>
-<li>Android性能优化第（二）篇—Memory Monitor检测内存泄露<br><a href="http://www.jianshu.com/p/ef9081050f5c" target="_blank" rel="external">http://www.jianshu.com/p/ef9081050f5c</a></li>
-<li>内存泄露实例分析 – Android内存优化第四弹<br><a href="http://www.jianshu.com/p/cbe2ee08ca02" target="_blank" rel="external">http://www.jianshu.com/p/cbe2ee08ca02</a></li>
-<li>Android最佳性能实践(一)——合理管理内存<br><a href="http://blog.csdn.net/guolin_blog/article/details/42238627" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/42238627</a></li>
-<li>Android最佳性能实践(二)——分析内存的使用情况<br><a href="http://blog.csdn.net/guolin_blog/article/details/42238633" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/42238633</a></li>
-</ul>
-<p>Android性能优化-内存泄漏的8个Case</p>
-<ul>
-<li>Android 内存优化总结&amp;实践<br><a href="https://mp.weixin.qq.com/s/2MsEAR9pQfMr1Sfs7cPdWQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/2MsEAR9pQfMr1Sfs7cPdWQ</a></li>
-<li>Android内存优化之OOM<br><a href="http://hukai.me/android-performance-oom/" target="_blank" rel="external">http://hukai.me/android-performance-oom/</a></li>
-<li>Android应用内存泄露分析、改善经验总结<br><a href="https://zhuanlan.zhihu.com/p/20831913" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/20831913</a></li>
-<li>内存泄露从入门到精通三部曲之基础知识篇<br><a href="http://dev.qq.com/topic/59152c9029d8be2a14b64dae" target="_blank" rel="external">http://dev.qq.com/topic/59152c9029d8be2a14b64dae</a></li>
-<li>内存泄露从入门到精通三部曲之排查方法篇<br><a href="http://dev.qq.com/topic/591522d9142eee2b6b9735a2" target="_blank" rel="external">http://dev.qq.com/topic/591522d9142eee2b6b9735a2</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&amp;mid=2650824544&amp;idx=1&amp;sn=2fc3cc16806bd1ddd9902ccef2cd12f5&amp;chksm=80b78bfeb7c002e822314661aa0df8e8d7981fb2ff3bc362c129bbf2952a87ff59a6213b821c&amp;scene=21#wechat_redirect" target="_blank" rel="external">手把手教你在Android Studio 3.0上分析内存泄漏</a></li>
-</ul>
-<p>##4 apk瘦身</p>
-<p>关于Apk瘦身，主要由以下几个方式：</p>
-<p>利用ProGuard压缩代码去除无用资源<br>andresguard进一步压缩与混淆资源<br>第三方开源库的瘦身，仅保留自己需要的部分<br>极致的图片压缩与webp的使用<br>合理配置去除不必要的配置，仅保留中文配置等…<br>so的优化与配置，只保留一类so<br>动态下发一些资源:字库、so、换肤包等；</p>
-<p>以上仅有7比较麻烦，需要服务端的配合，此外对于动态下发So，可以参考tinker对So热修复部分代码。</p>
-<p>其余都是常规方式，且1 ，5，6都比较简单，build.gradle最下配置即可，当然了也有一些参考文章：</p>
-<p>##App瘦身最佳实践<br><a href="http://www.jianshu.com/p/8f14679809b3#" target="_blank" rel="external">http://www.jianshu.com/p/8f14679809b3#</a><br>Android APP终极瘦身指南<br><a href="http://t.cn/RGjNpam" target="_blank" rel="external">http://t.cn/RGjNpam</a><br>Android性能优化（十）之App瘦身攻略<br><a href="http://www.jianshu.com/p/99f3c09982d4" target="_blank" rel="external">http://www.jianshu.com/p/99f3c09982d4</a><br>[Android技术专题]APK瘦身看这一篇文章就够了<br><a href="http://www.jianshu.com/p/6be4f98162d7" target="_blank" rel="external">http://www.jianshu.com/p/6be4f98162d7</a><br>安装包立减1M–微信Android资源混淆打包工具<br><a href="http://t.cn/RjjVe4f" target="_blank" rel="external">http://t.cn/RjjVe4f</a><br>爱奇艺Android移动客户端app瘦身经验<br><a href="http://t.cn/RjjfzrY" target="_blank" rel="external">http://t.cn/RjjfzrY</a><br>Android Webp 完全解析 快来缩小apk的大小吧<br>App优化攻略-用TextView显示图片<br>Android IconFont全攻略</p>
-<p>##5 电量优化</p>
-<p>电量优化说实在的关注度较低，一般情况就是合理的使用一些传感器、谨慎的使用Wake Lock、减少后台的不要的操作等…检测可以利用battery-historian </p>
-<p>Android性能优化（九）之不可忽视的电量<br><a href="http://www.jianshu.com/p/5d83d8649c98" target="_blank" rel="external">http://www.jianshu.com/p/5d83d8649c98</a><br>Android性能优化之电量篇<br><a href="http://hukai.me/android-performance-battery/" target="_blank" rel="external">http://hukai.me/android-performance-battery/</a><br>Android性能优化-电量优化<br>Android性能优化系列之电量优化<br><a href="http://blog.csdn.net/u012124438/article/details/74617649" target="_blank" rel="external">http://blog.csdn.net/u012124438/article/details/74617649</a><br>Android App优化之电池省着用<br><a href="http://www.jianshu.com/p/c55ef05c0047" target="_blank" rel="external">http://www.jianshu.com/p/c55ef05c0047</a><br><a href="https://github.com/google/battery-historian" target="_blank" rel="external">https://github.com/google/battery-historian</a></p>
-<p>好了，大家可以将每个方案的所采用的实际的优化策略记录下来，对每种方式提到的工具一定要自己去体验，用起来肯定不会有多么的困难，实操起来印象会更加深刻。</p>
-<p>性能优化并不困难，重要的还是要去实际的去操作一把，基本上也是面试常见的问题了。</p>
-<p>最后，好文非常多，本文希望仅起到抛砖引入的效果，感谢所有作者~</p>
-<p>想起来了16年MDCC上明云凶做过一个性能优化的分享，所以每次谈到性能优化我都能想到当年演讲的ppt。</p>
-<p>这里提供一下该ppt的下载以及Google的性能优化典范视频，链接：<a href="https://pan.baidu.com/s/1kVHyCUb，懒得复制的可以公众号内回复1118即可。" target="_blank" rel="external">https://pan.baidu.com/s/1kVHyCUb，懒得复制的可以公众号内回复1118即可。</a></p>
-<p>对了，腾讯有个非常强大的手机上的“集成调测环境”，就是手机上的软件，可以用于性能检测，叫GT。<br><a href="http://gt.tencent.com/download.html" target="_blank" rel="external">http://gt.tencent.com/download.html</a></p>
 
       
 
@@ -335,7 +265,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搬运</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">flutter</a>
         		</li>
       		
 		</ul>
@@ -402,7 +332,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/30/Android 性能优化的方面方面都在这儿/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/18/flutter_architecture/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -416,18 +346,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/02/01/tinker的一个注释/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          tinker的一个注释
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/13/Lint使用实践和感受/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Lint使用实践和感受</div>
+    <a href="/2019/04/29/original_settings/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">original settings(based on Android 8.1.0)</div>
       <i class="icon-circle-right"></i>
     </a>
   
