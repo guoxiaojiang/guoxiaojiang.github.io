@@ -17,7 +17,7 @@
 <meta property="og:description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
 <meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/final.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/Screenrecorder-2019-05-18-23-31-34-159.gif">
-<meta property="og:updated_time" content="2019-05-20T07:38:44.259Z">
+<meta property="og:updated_time" content="2019-05-20T08:11:04.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flutter 初体验和应用架构浅析">
 <meta name="twitter:description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
@@ -199,7 +199,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 <a href="https://developers.googleblog.com/2019/05/Flutter-io19.html" target="_blank" rel="external">https://developers.googleblog.com/2019/05/Flutter-io19.html</a><br>足以证明Google对Flutter，甚至可预见是对fuchsia寄予的厚望。</p>
+        <p>今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 <a href="https://developers.googleblog.com/2019/05/Flutter-io19.html" target="_blank" rel="external">https://developers.googleblog.com/2019/05/Flutter-io19.html</a><br>足以证明Google对Flutter，甚至可预见是对Fuchsia寄予的厚望。</p>
 <p>其实久仰Flutter的大名了，但是由于实际项目中没有用到，一直处于观望和碎片时间阅读一下文档和demo的状态。顺便说下，个人感觉对于技术，特别是这种在国内来说算是比较新的技术，一定要读原汁原味的英文原版文档，跟别人嚼过的还是不太一样的，而且还把英文练了。我就是在地铁上通勤时间读了dart 和 flutter的官方文档，阅读英文文档其实没有想象那么难。 <a href="https://dart.dev/guides/language/language-tour" target="_blank" rel="external">dart-language-tour</a>、<a href="https://flutter.dev/docs" target="_blank" rel="external">flutter docs</a> 。今年的I/O大会详细关注了和flutter、dart相关的部分。最近小组有一个项目恰好不用集成到系统大包中，仅供给测试人员使用，所以就用了flutter来开发，所以有很多感触，今天整理一下。</p>
 <p>闲言碎语不多讲了，先说下初体验吧：</p>
 <p>首先是爽，dart的现代化语法、flutter返璞归真的思想（一切皆widget）都让人感觉爽，当然，还有官方最为津津乐道的Hot Reload。</p>
@@ -315,6 +315,11 @@
 </ul>
 <p>另外，根据provider官方的解释和I/O大会上演示的场景，似乎更适合一个widget影响另一个widget的状态时使用，比如I/O大会上用户操作Slider时对PieChart的影响，也就是说一个widget不应该知道和它无干系的另一个widget的存在（这就是为什么flutter没有findViewById类似的东西）。但是不知道provider适不适合网络数据驱动UI改变这种场景？</p>
 <h3 id="示例源码"><a href="#示例源码" class="headerlink" title="示例源码"></a>示例源码</h3><p><a href="https://github.com/guoxiaojiang/flutter_architecture" target="_blank" rel="external">https://github.com/guoxiaojiang/flutter_architecture</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<p><a href="https://medium.com/flutter-community/flutter-app-architecture-101-vanilla-scoped-model-bloc-7eff7b2baf7e/" target="_blank" rel="external">Flutter app architecture 101: Vanilla, Scoped Model, BLoC</a></p>
+<p><a href="https://www.youtube.com/watch?v=d_m5csmrf7I" target="_blank" rel="external">Pragmatic State Management in Flutter (Google I/O’19)</a></p>
+<p><a href="https://juejin.im/post/5c6d4b52f265da2dc675b407" target="_blank" rel="external">Flutter | 状态管理特别篇 —— Provide</a></p>
+</blockquote>
 
       
 
@@ -572,11 +577,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tech</a>
+                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
+                <a href="javascript:void(0)" class="js-tag color5">tech</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,7 +589,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
+                <a href="javascript:void(0)" class="js-tag color4">settings</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,11 +597,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
+                <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">settings</a>
+                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,7 +613,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lint</a>
+                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
               </li>
             
             <div class="clearfix"></div>
