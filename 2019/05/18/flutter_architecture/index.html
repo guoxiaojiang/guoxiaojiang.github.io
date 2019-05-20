@@ -17,7 +17,7 @@
 <meta property="og:description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
 <meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/final.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/guoxiaojiang/flutter_architecture/master/Screenrecorder-2019-05-18-23-31-34-159.gif">
-<meta property="og:updated_time" content="2019-05-18T16:36:35.724Z">
+<meta property="og:updated_time" content="2019-05-20T04:49:09.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flutter 初体验和应用架构浅析">
 <meta name="twitter:description" content="今年I/O大会关于Flutter部分最大的动作之一就是Google Flutter团队宣布Flutter开始支持全平台，包括了移动设备（Android &amp;amp; IOS）、Web、PC（Windows、Mac和Linux）以及嵌入式设备 https://developers.googleblog.com/2019/05/Flutter-io19.html足以证明Google对Flutter，甚至">
@@ -239,7 +239,7 @@
 <p>使用setState的优点是，简单直观，也不用引入第三方库。</p>
 <p>缺点是显而易见的：</p>
 <ul>
-<li>首先，整个widget数都会刷新，不管你预期要更新的是那部分。比如上述demo中的AppBar和ListView上部的“山西省的城市有如下：”这些Widget是不需要刷新的，造成性能浪费</li>
+<li>首先，整个widget数都会刷新，不管你预期要更新的是那部分。比如上述demo中的AppBar是不需要刷新的，造成性能浪费</li>
 <li>Widget不但承担了UI的展示，而且还处理业务逻辑、处理数据、管理状态。这显然违反了单一职责原则。</li>
 <li>这样的代码可扩展性和维护性极差，像极了所有的东西堆在一个Activity中的方式</li>
 </ul>
@@ -508,7 +508,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">flutter</a>
+                <a href="javascript:void(0)" class="js-tag color5">lint</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,15 +516,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lint</a>
+                <a href="javascript:void(0)" class="js-tag color3">flutter</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">settings</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
+                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,7 +528,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">airplay</a>
+                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">settings</a>
               </li>
              
               <li class="article-tag-list-item">
