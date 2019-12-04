@@ -176,6 +176,102 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-code_review" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/03/code_review/">Google的代码review指南</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/03/code_review/" class="archive-article-date">
+  	<time datetime="2019-12-03T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Google最近开源了一份 “Google’s Engineering Practices documentation”，狗家工程实践文档。这份文档主要从两个角色出发，结合Google的工程实践，来针对code review娓娓道来：</p>
+<ul>
+<li>从Reviewer角度，<a href="https://google.github.io/eng-practices/review/reviewer/" target="_blank" rel="external">How to do a code review</a></li>
+<li>从CL作者的角度，<a href="https://google.github.io/eng-practices/review/developer/" target="_blank" rel="external">The CL author’s guide to getting through code review</a><br>全篇洋洋洒洒好多页，有高屋建瓴的工程思想，同时也干货满满。有极高的参考价值，值得择善而从。</li>
+</ul>
+<h2 id="How-to-do-a-code-review"><a href="#How-to-do-a-code-review" class="headerlink" title="How to do a code review"></a>How to do a code review</h2><h3 id="代码评审标准"><a href="#代码评审标准" class="headerlink" title="代码评审标准"></a>代码评审标准</h3><p>Code review的最终目的是确保我们的代码库中整体的健康程度可以随着时间的推移可以不断改善，整个review过程，使用到的工具、定制的流程，都是为此服务。</p>
+<p>在实践中，遵循上述原则，就不得不做出一系列的平衡、取舍。</p>
+<blockquote>
+<p>The primary purpose of code review is to make sure that the overall code health of Google’s code base is improving over time. All of the tools and processes of code review are designed to this end.<br>In order to accomplish this, a series of trade-offs have to be balanced.</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2019/12/03/code_review/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tech</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/tech//" class="article-tag-list-link color5">tech</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/03/code_review/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-flutter_architecture" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1008,97 +1104,6 @@
 
 
   
-    <article id="post-Android面试总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/05/Android面试总结/">Android面试总结</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/05/Android面试总结/" class="archive-article-date">
-  	<time datetime="2017-05-05T04:49:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、启动异步任务有哪几种方式？AsyncTask有哪几步？<br>Thread+handler、AsyncTask<br>onPreExecute、doInBackground、onPostExecute、onProgressUpdate<br>AyncTask的线程池默认最大线程数是CPU_COUNT*2+1个</p>
-<p>2、线程加锁有哪几种方式？synchronized修饰static方法和非static方法有何不同？<br>synchronized和java.util.concurrent.lock.Lock</p>
-<p>3、如何在上亿条数据中选择出最大的100条？（建最小堆 <a href="http://doc.okbase.net/zyq522376829/archive/169290.html）" target="_blank" rel="external">http://doc.okbase.net/zyq522376829/archive/169290.html）</a></p>
-<p>4、ContentProvider通过uri在对应用内提供数据和对外提供数据有何不同？ContentProvider的原理？<br><a href="http://blog.csdn.net/luoshengyang/article/details/6967204" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/6967204</a></p>
-<p>5、LinearLayout和RelativeLayout实现有何不同？（源码），如果只有一个子View，用哪个好一些？怎样取舍？<br><a href="http://www.jianshu.com/p/8a7d059da746" target="_blank" rel="external">http://www.jianshu.com/p/8a7d059da746</a></p>
-        
-          <a class="article-more-a" href="/2017/05/05/Android面试总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tech</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/tech//" class="article-tag-list-link color5">tech</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/05/Android面试总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1196,23 +1201,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">tech</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">flutter</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">settings</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1220,11 +1213,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+                <a href="javascript:void(0)" class="js-tag color5">-reactnative - tech</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1232,7 +1221,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搬运</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">persistent</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">flutter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">愤世</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">settings</a>
               </li>
             
             <div class="clearfix"></div>

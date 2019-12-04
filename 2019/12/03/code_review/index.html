@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/4 | 郭效江</title>
+  <title>Google的代码review指南 | 郭效江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="stay hungry stay foolish">
-<meta property="og:type" content="website">
-<meta property="og:title" content="郭效江">
-<meta property="og:url" content="http://yoursite.com/archives/2019/04/index.html">
+  <meta name="description" content="Google最近开源了一份 “Google’s Engineering Practices documentation”，狗家工程实践文档。这份文档主要从两个角色出发，结合Google的工程实践，来针对code review娓娓道来：  从Reviewer角度，How to do a code review 从CL作者的角度，The CL author’s guide to getting thr">
+<meta name="keywords" content="tech">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google的代码review指南">
+<meta property="og:url" content="http://yoursite.com/2019/12/03/code_review/index.html">
 <meta property="og:site_name" content="郭效江">
-<meta property="og:description" content="stay hungry stay foolish">
+<meta property="og:description" content="Google最近开源了一份 “Google’s Engineering Practices documentation”，狗家工程实践文档。这份文档主要从两个角色出发，结合Google的工程实践，来针对code review娓娓道来：  从Reviewer角度，How to do a code review 从CL作者的角度，The CL author’s guide to getting thr">
+<meta property="og:updated_time" content="2019-12-04T10:11:43.514Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="郭效江">
-<meta name="twitter:description" content="stay hungry stay foolish">
+<meta name="twitter:title" content="Google的代码review指南">
+<meta name="twitter:description" content="Google最近开源了一份 “Google’s Engineering Practices documentation”，狗家工程实践文档。这份文档主要从两个角色出发，结合Google的工程实践，来针对code review娓娓道来：  从Reviewer角度，How to do a code review 从CL作者的角度，The CL author’s guide to getting thr">
   
     <link rel="alternative" href="/atom.xml" title="郭效江" type="application/atom+xml">
   
@@ -174,36 +176,319 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-code_review" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/29/original_settings/" class="archive-article-date">
-  	<time datetime="2019-04-29T09:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/29/original_settings/">original settings(based on Android 8.1.0)</a>
+    <h1 class="article-title" itemprop="name">
+      Google的代码review指南
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/12/03/code_review/" class="archive-article-date">
+  	<time datetime="2019-12-03T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Google最近开源了一份 “Google’s Engineering Practices documentation”，狗家工程实践文档。这份文档主要从两个角色出发，结合Google的工程实践，来针对code review娓娓道来：</p>
+<ul>
+<li>从Reviewer角度，<a href="https://google.github.io/eng-practices/review/reviewer/" target="_blank" rel="external">How to do a code review</a></li>
+<li>从CL作者的角度，<a href="https://google.github.io/eng-practices/review/developer/" target="_blank" rel="external">The CL author’s guide to getting through code review</a><br>全篇洋洋洒洒好多页，有高屋建瓴的工程思想，同时也干货满满。有极高的参考价值，值得择善而从。</li>
+</ul>
+<h2 id="How-to-do-a-code-review"><a href="#How-to-do-a-code-review" class="headerlink" title="How to do a code review"></a>How to do a code review</h2><h3 id="代码评审标准"><a href="#代码评审标准" class="headerlink" title="代码评审标准"></a>代码评审标准</h3><p>Code review的最终目的是确保我们的代码库中整体的健康程度可以随着时间的推移可以不断改善，整个review过程，使用到的工具、定制的流程，都是为此服务。</p>
+<p>在实践中，遵循上述原则，就不得不做出一系列的平衡、取舍。</p>
+<blockquote>
+<p>The primary purpose of code review is to make sure that the overall code health of Google’s code base is improving over time. All of the tools and processes of code review are designed to this end.<br>In order to accomplish this, a series of trade-offs have to be balanced.</p>
+</blockquote>
+<a id="more"></a>
+<p>比如，一个CL只要能提升代码库的健康程度（这里补充一下：用合理、不破坏性的方式满足产品的需求更新和新增也算是提升“健康程度”，而且是日常），Reviewer就应该批准它，即便是这个CL并不完美。Google强调，这是所有评审原则中的最高原则。毕竟没有“完美”的代码，只有更好的代码。与其追求完美，不如追求持续性的改进。只要一个CL能对整个系统的可维护性、可读性、理解性、起到改善作用，Reviewer就不能因为它不够完美而推迟数天甚至数周再批准。</p>
+<blockquote>
+<p>In general, reviewers should favor approving a CL once it is in a state where it definitely improves the overall code health of the system being worked on, even if the CL isn’t perfect.</p>
+</blockquote>
+<p>Reviewer的评审原则还包括：</p>
+<ul>
+<li>技术事实和数据优于个人偏好和意见。</li>
+<li>在代码风格方面，《Google代码风格指南》是最权威参考资料。任何不在风格指南中的代码习惯，都属于个人偏好问题。一般来说，CL的风格和现有代码要保持一致。但如果原来没有规定代码风格，就应该接受CL作者的风格。</li>
+<li>软件设计方面从来不是纯粹的风格问题，或者纯粹个人的偏好问题。很多所谓的风格都是建立在一些基本准测之上的，它们并不是简单地由个人偏好决定的。有时，如果有几个不同的可行方案，只要 CL 作者能够通过数据或基本工程原则证明几种方案同样有效，那么评审者应该接受作者的风格。否则，设计方案的选择还是应该根据软件设计的标准原则来进行。</li>
+<li>如果没有其它适用规则，那么评审者可以要求作者的偏好与当前代码库保持一致，只有这样不会对整体的代码健康水平产生影响。<br>Technical facts and data overrule opinions and personal preferences.</li>
+</ul>
+<blockquote>
+<p>On matters of style, the style guide is the absolute authority. Any purely style point (whitespace, etc.) that is not in the style guide is a matter of personal preference. The style should be consistent with what is there. If there is no previous style, accept the author’s.</p>
+<p>Aspects of software design are almost never a pure style issue or just a personal preference. They are based on underlying principles and should be weighed on those principles, not simply by personal opinion. Sometimes there are a few valid options. If the author can demonstrate (either through data or based on solid engineering principles) that several approaches are equally valid, then the reviewer should accept the preference of the author. Otherwise the choice is dictated by standard principles of software design.</p>
+<p>If no other rule applies, then the reviewer may ask the author to be consistent with what is in the current codebase, as long as that doesn’t worsen the overall code health of the system.</p>
+</blockquote>
+<h3 id="Code-Review应该看些什么"><a href="#Code-Review应该看些什么" class="headerlink" title="Code Review应该看些什么"></a>Code Review应该看些什么</h3><p>CodeReview进行时应该时刻牢记上一章节的代码评审标准，具体到应该看些什么，大致可以总结为：</p>
+<ul>
+<li>设计：code review时最重要的事情就是看CL作者提交作品的设计，是否对现有系统的架构有破坏性？是否对代码库有意义？这个更改是否真的属于你的代码库？能否很好的和系统的其它模块协同工作？现在添加是否是合适的时机？</li>
+<li>功能：这笔提交是否达到了提交者的功能性目的？它能为最终产品的使用者（用户）提供真正的帮助吗？从用户的角度，考虑一些实际场景的边界问题、异常情况、并发情况等，站在用户角度思考，确保不会引入bug。在必要时，亲自验证这个feature，尤其是当UI/UE改变时，如果不方便独立验证，可要求作者在UT等合适的地方提供功能演示。</li>
+<li>复杂性：CL是否为了实现功能或修复问题，导致设计特别复杂？这个类、函数是否过于复杂导致其它人难于理解？如果复杂到难以理解，很可能会带来一个隐患，就是协同工作的同事试图调用或者修改这段代码时，会引入新的bug。尽量避免“过度工程”</li>
+<li>测试：除非紧急需求，每个新提交的CL都应该包含相应的单元测试，并且确保测试的正确性、有用性。牢记，测试也是必须维护的代码。</li>
+<li>命名：CL的作者是否使用的恰当的、符合规范的变量、类等名字？好的名字对于可读性是非常重要的。</li>
+<li>注释：作者是否针对关键性代码写了详尽的、有助于了解这段代码的注释。通常，注释应该是在解释这些代码为什么存在，而不应该解释这些代码在做什么。如果代码本身不够清晰，无法解释自己，那么应该简化代码。</li>
+<li>风格：Google有自己的代码风格规范，覆盖了各种主流语言，需要要求作者遵循。要避免在review时加入个人偏好，要有共同的准则。如果你认为某段代码风格需要改善，并且不在代码规范中，可使用”Nit:”前缀加入到评论中让作者知道并判断是否需要改善。</li>
+<li>文档：如果这笔提交更改了用户构建、测试、交互、或者发布代码的方式，需要检查是否更新了对应的文档，包括不限于ReadMe等。</li>
+<li>细致入微：尽量覆盖到分配给你待Review的每一行代码。（阅读文档时发现美国人对于鼓励人真是无处不在，有一句话是这样：At Google, we hire great software engineers, and you are one of them. If you can’t understand the code, it’s very likely that other developers won’t either. So you’re also helping future developers understand this code, when you ask the developer to clarify it.）如果你觉得虽然理解这段代码但是又觉得没有资格做出判断和检查，那么需要寻找一位你认为合格的reviewer，特别是涉及到安全性、并发性、可用性、国际化等复杂问题时。</li>
+<li>上下文：查看上下文是必须的并且有效的，一般code review工具只会展示更改或新增的这一小部分代码，但是有时候你还是要联系到上下文、联系到整个系统中。谨记，这笔提交一定不能对整个系统的健康程度产生不利影响。</li>
+<li>发现优点：Code Review本身也是学习的一个过程，如果在这过程中你看到了令你耳目一新或者受益匪浅的设计或算法等，或者针对你的评论做出比较好的解决方案时，想办法让作者知道，告诉他们做了什么有价值的事情，要有鼓励和赞赏，而不仅仅是挑错误。</li>
+</ul>
+<blockquote>
+<p>In doing a code review, you should make sure that:</p>
+<ul>
+<li>The code is well-designed.</li>
+<li>The functionality is good for the users of the code.</li>
+<li>Any UI changes are sensible and look good.</li>
+<li>Any parallel programming is done safely.</li>
+<li>The code isn’t more complex than it needs to be.</li>
+<li>The developer isn’t implementing things they might need in the future but don’t know they need now.</li>
+<li>Code has appropriate unit tests.</li>
+<li>Tests are well-designed.</li>
+<li>The developer used clear names for everything.</li>
+<li>Comments are clear and useful, and mostly explain why instead of what.</li>
+<li>Code is appropriately documented (generally in g3doc).</li>
+<li>The code conforms to our style guides.</li>
+</ul>
+</blockquote>
+<h3 id="Code-Review的“路标”-——-一般性步骤"><a href="#Code-Review的“路标”-——-一般性步骤" class="headerlink" title="Code Review的“路标” —— 一般性步骤"></a>Code Review的“路标” —— 一般性步骤</h3><p>知道了code review时“看”什么，那么，在看似零散的“茫茫文件海”中来处理review工作最高效有用的方法是什么？总体来说有以下几步：</p>
+<ul>
+<li>这笔提交带来的改变有没有意义？</li>
+<li>它有没有一个好的描述 <a href="https://google.github.io/eng-practices/review/developer/cl-descriptions.html" target="_blank" rel="external">description</a> ？</li>
+<li>首先摘出这笔提交的重要/主干部分，整体的设计是否合理？</li>
+<li>再按照恰当的顺序查看剩余的部分</li>
+</ul>
+<blockquote>
+<ul>
+<li>Does the change make sense? Does it have a good description?</li>
+<li>Look at the most important part of the change first. Is it well- designed overall?</li>
+<li>Look at the rest of the CL in an appropriate sequence.</li>
+</ul>
+</blockquote>
+<h4 id="第一步：结合项目本身，总体查看这笔提交"><a href="#第一步：结合项目本身，总体查看这笔提交" class="headerlink" title="第一步：结合项目本身，总体查看这笔提交"></a>第一步：结合项目本身，总体查看这笔提交</h4><p>从CL的描述首先总体地了解它做了什么，或者解决了哪个问题。这笔提交带来的改变有没有意义？如果这笔提交带来的变化根本没必要发生，那么需要立即告诉它的作者，并且解释为什么不应该发生。如果可能，提出自己的建议，应该如何做。</p>
+<p>注意在拒绝的时候给出原因和建议，另外，要不失礼貌，这很重要，因为我们要尊重对方的付出，即便是意见不一致，都要尊重彼此（都不容易，笑哭脸）。</p>
+<p>如果你不止一次地经常遇到拒绝整笔提交的合入，那你需要停下来想一想，是否需要和团队成员再次共识你们的分工、开发流程等。尽可能得多做沟通，和每个代码贡献者做到信息透明和共识。拒绝要趁早，在知道一个没必要的设计或者修改方案，在开发者没有付诸行动之前对他说“不”远远比他做了辛苦的无用功要好的多。</p>
+<h4 id="第二步：检查CL的主干部分"><a href="#第二步：检查CL的主干部分" class="headerlink" title="第二步：检查CL的主干部分"></a>第二步：检查CL的主干部分</h4><p>正常来讲，一般一次提交会有一个最重要的文件可以最大限度体现这笔提交的逻辑变化（如果不是，则需要审视提交的方式和频次，一般来说一个主要的变化需要提交一次），这是这笔提交最重要的一部分。</p>
+<p>提纲挈领，首先抓住重点，这样就会给剩余的更改提供一个有效的上下文环境，有助于我们更顺畅地进行代码review。如果这个CL太庞大，以至于你根本无法判断出哪部分是主干部分，先请教作者，让他/她帮助你找出主干部分，或者要求他们把这些提交拆分成不同的提交。</p>
+<p>在这一步，如果你发现了严重的设计或者方案选型等问题，请立即做出回应，即使你现在没有时间review剩余的部分了，也请立即把你的评论发送给对方。事实上，这个时候review剩余的部分已经意义不大，很有可能是浪费时间。因为主干部分做出修改很可能导致这些细枝末节的地方也会更改或消失。</p>
+<p>之所以说这一步发现了设计缺陷或者方案选型等问题要立即迅速回应，主要有以下两方面的原因：</p>
+<p>开发者提交了一个CL之后，很可能在等待review反馈的同时，基于这个更改继续做其它新的开发工作。如果这个CL有显著的设计缺陷或选型错误，在他们得知之后，很可能后续的这段工作也白费了，不得不受牵连地重做。你需要在发现问题之后尽快地通知他们，避免在错误或不合理的基础上走的更远。</p>
+<p>大的设计变更通常比小的更改更耗时，作为开发人员一般都会有DeadLine，为了守住DeadLine，并且高质量地完成待合入的代码，开发者需要在一得知大的设计有缺陷之后立即着手这部分的重新设计或修改。</p>
+<h4 id="第三步：查看CL剩余的部分"><a href="#第三步：查看CL剩余的部分" class="headerlink" title="第三步：查看CL剩余的部分"></a>第三步：查看CL剩余的部分</h4><p>一旦你确定了这笔提交主干部分总体而言没有大的设计缺陷或选型问题，可尝试按照逻辑顺序来逐个check剩余的每一个更改，注意不要漏掉。通常最简单的顺序就是按照code review工具（gerrit等）展示给你的先后文件循序。有时候，阅读主业务代码之前先阅读测试代码是非常高效和有用的，因为测试代码有助于你理解都具体做了哪些更改或添加。</p>
+<blockquote>
+<ul>
+<li>Step One: Take a broad view of the change</li>
+<li>Step Two: Examine the main parts of the CL</li>
+<li>Step Three: Look through the rest of the CL in an appropriate sequence</li>
+</ul>
+</blockquote>
+<h3 id="Code-Review的速度"><a href="#Code-Review的速度" class="headerlink" title="Code Review的速度"></a>Code Review的速度</h3><h4 id="为什么CodeReview的速度很重要："><a href="#为什么CodeReview的速度很重要：" class="headerlink" title="为什么CodeReview的速度很重要："></a>为什么CodeReview的速度很重要：</h4><p>Google强调，在Goolge，需要重视和不断优化的是开发团队共同协作生产产品的速度，而不是某个人某个员工的开发编码速度。个人的开发速度固然重要，但是远远没有整个团队的高效率重要。</p>
+<p>如果说code review的速度慢，有可能带来的后果有：</p>
+<ul>
+<li>整个团队的效率变低了。虽然reviewer可能处理别的开发等工作，推进这些事情前进。但是就这么拖着不review，让开发者等待或者在未确认的CL基础上做进一步工作，影响的却是整个团队其它人的时间，可能会导致数天甚至数周数个月的delay。</li>
+<li>开发者开始抵触甚至抗议Code review这个过程。如果reviewer遇到一笔提交好几天才给反馈，并且每次反馈都有要求针对这次提交进行大的修改和完善，这对开发者来说是不可接受的。这就很容易带来他们的抱怨，抱怨的是审查太过“苛刻”。如果reviewer在每次快速回应，发现同样的重大问题需要开发者修改和完善的，开发者也容易接受，一般也不会有抱怨。代码review过程中的很多抱怨通常都是通过快速响应，加快进程来解决的。</li>
+<li>整体系统的健康程度会受到负面影响。如果review很慢，就有可能会造成一些不太好的代码被迫合入。另外缓慢的review也有可能减少一些改善性的工作，比如无用代码的清理、必要的重构、进一步的改进等，不利于系统的健康程度改进。</li>
+</ul>
+<h4 id="应该多快？"><a href="#应该多快？" class="headerlink" title="应该多快？"></a>应该多快？</h4><p>当一个CL提出时，如果你没有全身心经历聚焦在某件未完成的任务上，那么就立即review，越快越好。</p>
+<p>不应该超过一个工作日。一般性的review应该在一个工作日之内进行一轮或多轮review，直至结束。</p>
+<h5 id="为了review的速度中断一切事情？"><a href="#为了review的速度中断一切事情？" class="headerlink" title="为了review的速度中断一切事情？"></a>为了review的速度中断一切事情？</h5><p> <strong>不是的</strong>。如果你正在全身投入在未完成的一个比如写代码等任务上，不要为了code review而打断，继续吧。研究表明，与一气呵成写完相比，中断一位程序猿正在行云流水般的工作然后再让他/她回头继续要花费更久的时间。所以打断你正在进行的工作特别是coding而去review是要花费更大代价的，不如让这笔CL稍等一下。</p>
+<p>给自己手头的工作留整块的时间，确保不被打扰。寻找一个间隙，去回应当前的review，比如，手头工作处理完了，或者午饭后，会议结束后等等。</p>
+<h4 id="快速响应"><a href="#快速响应" class="headerlink" title="快速响应"></a>快速响应</h4><p>上述一直在阐述code review的速度，需要强调的是，我们最关心的应该是响应的时间，而不是说整个review完成并submit需要的时间。理想情况下，整个过程应该是需要快一些，但是快速响应是最需要被强调的，它比整体过程的速度更重要。（事实上reviewer的响应速度某种程度决定了整体速度）</p>
+<p>有时一个CL提交到入库的整个过程会持久一些，但是reviewer快速的响应会增加CL作者的积极性，减少因为“缓慢”、“拖拉”带来的挫败感。</p>
+<p>如果你当前确实太忙，暂时不能针对这笔CL全都看一遍，那你应该尽快给出一个响应，让作者知道什么时候你会着手review，或者建议其它现在有空，并且合适review的人进行review，亦或者快速给一些初步的<a href="https://google.github.io/eng-practices/review/reviewer/navigate.html" target="_blank" rel="external">一般性评论</a>（但这并不意味着你应该打断你正在进行的编码等工作，寻找一个合适的断点时间来做这件事情）</p>
+<p>总而言之，言而总之，我们一定要花费足够多的时间细致入微的进行review确认这些代码确实是符合“<a href="https://google.github.io/eng-practices/review/reviewer/standard.html" target="_blank" rel="external">代码评审标准</a>”的。同时，满足条件的话，我们reviewer的响应速度越快越好。</p>
+<h4 id="带着评论-2"><a href="#带着评论-2" class="headerlink" title="带着评论+2"></a>带着评论+2</h4><p>为了加快code review速度，在这些情况下即便是这笔提交还留有一些你评论中提到的未解决的问题，reviewer也应该”LGTM，approval”（+2）：</p>
+<ul>
+<li>Reviewer确信CL的作者将会以合适的方式处理你评论中未尽到的问题；</li>
+<li>这些未尽到的问题是次要的，不必由开发者来完成。<br>如果有不清楚的地方，需要reviewer直言不讳的指出，说出自己想要的。</li>
+</ul>
+<h4 id="超大一笔提交"><a href="#超大一笔提交" class="headerlink" title="超大一笔提交"></a>超大一笔提交</h4><p>如果有人提了一笔很大的提交，以至于你不确定你啥时候才能review完，这个时候你最好的选择是让开发者把这笔提交按照应有的规则拆分为若干笔小的提交，这对评审者来说是非常有用的，即便是会给开发者带来额外的工作。</p>
+<p>如果这笔超大的提交也实在没有办法拆分了，而你又没有时间很快的每一个变化都review。那么，至少保证首先针对他的整体设计的问题和疑惑做出评论，发送给开发者进行确认和改进。作为评审者，你的目标之一就是不要block开发者，使他为了不破坏，改进整体系统代码的健康程度，迅速采取进一步的行动。</p>
+<h4 id="日拱一卒，功不唐捐"><a href="#日拱一卒，功不唐捐" class="headerlink" title="日拱一卒，功不唐捐"></a>日拱一卒，功不唐捐</h4><p>不积跬步无以至千里，如果你在code review的时候牢记这些指导准则，坚持对代码评审严格要求，慢慢你就会发现，整个过程会越来越快，越来越顺畅。开发者也越来越清楚健康的代码，有意义的提交应该是什么样子的，开始提交越来越棒的代码，你需要review花费的时间会越来越少。评审者也会不断快速响应，不会增加不必要的延时。坚持，不要为了提高速度而在<a href="(https://google.github.io/eng-practices/review/reviewer/standard.html">代码评审标准</a>)上或者代码质量进行任何妥协。——从长远看这种妥协并不会使整个过程越来越快。</p>
+<h4 id="紧急情况"><a href="#紧急情况" class="headerlink" title="紧急情况"></a>紧急情况</h4><p>当然，有特例。在一些紧急情况下，review需要快速进行完，这时候就可以对质量和准则放宽标准。但前提是，确定这是紧急情况。查看紧急情况有哪些：<a href="https://google.github.io/eng-practices/review/emergencies.html#what" target="_blank" rel="external">https://google.github.io/eng-practices/review/emergencies.html#what</a></p>
+<h3 id="如何写code-review的评论comments"><a href="#如何写code-review的评论comments" class="headerlink" title="如何写code review的评论comments"></a>如何写code review的评论comments</h3><ul>
+<li>要友好</li>
+<li>解释清楚原因</li>
+<li>指出问题的同时给出明确的方向，让开发者自己来做出决定</li>
+<li>鼓励，引导开发者写出简明易懂的代码或者有助于理解的代码注释，而不是给你解释代码的复杂性。</li>
+</ul>
+<blockquote>
+<ul>
+<li>Be kind.</li>
+<li>Explain your reasoning.</li>
+<li>Balance giving explicit directions with just pointing out problems and letting the developer decide.</li>
+<li>Encourage developers to simplify code or add code comments instead of just explaining the complexity to you.</li>
+</ul>
+</blockquote>
+<h4 id="要友好——礼貌问题"><a href="#要友好——礼貌问题" class="headerlink" title="要友好——礼貌问题"></a>要友好——礼貌问题</h4><p>一般来说，在明确、清晰、对开发者确实有帮助的表达的同时，礼貌和尊重是重要的前提。有一种标准就是，你评论的时候是客观针对这笔提交的代码进行评论，而非针对开发者。也不是绝对的标准，但尤其是当你带有情绪或者有争议的话时，一定要记住遵循这个标准。举个简单的栗子：</p>
+<p>不好的评论：“你为什么在这里使用线程？并发处理在这种场景下有什么卵用?”</p>
+<p>好的评论：“看起来这里的并发操作增加了系统的复杂性，而没有我所看到的任何实际的性能优势。因为没有性能上的好处，所以这段代码最好是单线程的，而不是使用多个线程。”</p>
+<h4 id="要解释清原因"><a href="#要解释清原因" class="headerlink" title="要解释清原因"></a>要解释清原因</h4><p>上述好的评论你应该可以感觉到，它可以帮助开发者理解你做出这个评论和断言的原因是什么。并不是说每一个评论都要详细的原因和解释，但有时对于你的意图、你正在遵循的最佳实践和规范、或者你针对改进代码健康程度做出更多的解释是很有必要的。</p>
+<h4 id="给出建议"><a href="#给出建议" class="headerlink" title="给出建议"></a>给出建议</h4><p>一般来说，修复CL的问题是开发者的责任，而不是评审者的。你并没有必要给出详尽的设计方案或直接编写他的代码。</p>
+<p>然而这并不意味着评审者不针对CL的改进提供任何有用的帮助，通常，你应该在指出问题和给出解决方案之间保持一种平衡。指出问题，让开发者做出决定会有利于他/她自身的学习成长，更会使得以后的代码review越来越顺畅。甚至很有可能，开发者会针对你提出的问题想出比你更好的解决方案，因为毕竟是他/她自己写的代码。</p>
+<p>实际操作中，直接的指出问题，给出修改建议可能更快速有效。根据实际情况来吧，反正code review的第一目标就是尽可能在代码库中合入最佳的代码，第二个目标是提升团队开发者的技能，使团队工作越来越高效高品质。</p>
+<h4 id="来自开发者的解释"><a href="#来自开发者的解释" class="headerlink" title="来自开发者的解释"></a>来自开发者的解释</h4><p>当你要求开发者解释一段你并没有看懂的代码时，一般来说他会适当重写这段代码使人更易懂。偶尔在代码中多添加一些注释也是一种有助于让你理解的手段，但是不要让这段注释解释这段太过复杂的代码在干什么。（代码本身太复杂导致可读性查要简化代码本身）</p>
+<p>仅仅在gerrit等代码review工具上的代码解释对之后的代码阅读者或者维护者是没有帮助的。在review工具上针对提交代码的解释只有在一些特定场景下是可接收的，比如你对这块业务不是很熟悉，而CL作者和其它开发者很熟悉，作者对这块业务的解释等。</p>
+<h4 id="怎么处理被搁浅的code-review"><a href="#怎么处理被搁浅的code-review" class="headerlink" title="怎么处理被搁浅的code review"></a>怎么处理被搁浅的code review</h4><p>有时，开发者会拖延或推迟评审者真对CL的评论。要么他们不同意你的建议，要么他们会抱怨你太苛刻了。</p>
+<h4 id="谁对？"><a href="#谁对？" class="headerlink" title="谁对？"></a>谁对？</h4><p>开发者不同意你的建议时，请认真花点时间考虑一下他们是否是对的。因为通常他们比你更接近和熟悉这些代码，所以他们很有可能比你对这些代码在某些层面更有洞察力和判断力。从代码质量和代码库健康程度的角度看他们的论点是否真的有意义？是否合理？如果是的话，让他们知道他们是对的，让问题得以解决。</p>
+<p>但是开发者并不一定总是对的。这种情况下，评审者应该进一步解释为什么自己的建议是正确的。一个好的解释需要站在对方的角度先表示对开发者回复的理解，以及为什么这块要求做出改动。</p>
+<p>特别是当评审者相信他们的建议一定会对代码的健康程度有改善，那就应该坚持要求做出修改。代码库整体品质和健康程度的提升是又这一次次小的改善引起质变的。</p>
+<p>有时这种有争议的review解释需要往复几次才能让对方理解，这个过程中切记要保持礼貌的态度。让开发者知道，你很清除他们的想法，只是你不同意他们的观点而已。</p>
+<h4 id="会让开发者感到沮丧？"><a href="#会让开发者感到沮丧？" class="headerlink" title="会让开发者感到沮丧？"></a>会让开发者感到沮丧？</h4><p>评审者有时候会觉得如果坚持自己的改进的话，会让开发者觉得很沮丧。事实上开发者有时确实会，但是通常是很短暂的，甚至到后来会感激你提出的合理建议，让你帮助他提高了自己的编码质量。一般来讲，只要你<a href="https://google.github.io/eng-practices/review/reviewer/comments.html#courtesy" target="_blank" rel="external">措辞礼貌</a>，开发者很可能没有挫败沮丧的感觉，很有可能这些担心是评审者不必要的担心。沮丧和挫败感有时候可能是对于评审者本身的评论方式可能有关，而非评审者对于提高代码品质的坚持。</p>
+<h4 id="之后再解决？"><a href="#之后再解决？" class="headerlink" title="之后再解决？"></a>之后再解决？</h4><p>一种常见的推迟解决的原因是开发者急于完成任务（这当然可以理解），他们不想再反复修改，review才让这笔CL入库。这时他们会说以后的CL中会处理提到的问题，先+2吧。有些开发者没问题的，后续都会再提交一笔CL（follow-up CL）用于修复之前的问题。但是过往的经验告诉我们，拖的时间越久，开发者一般越不会解决遗留的问题。除非这笔提交submit之后立即着手处理遗留的问题。这并不是说开发者不负责任，而是确实有很多工作要完成，处理遗留问题会在成堆的工作中被遗忘。所以最好不要遗留，坚持让开发者在合入代码之前把问题解决掉。这种“之后再解决”是代码库中代码健康程度下降的重要原因之一。</p>
+<p>除非是<a href="https://google.github.io/eng-practices/review/emergencies.html#what" target="_blank" rel="external">紧急情况</a>，如果CL带来了新的复杂性问题，需要在合入之前处理掉；如果CL会对其它相关联的模块或业务造成了影响，不适合本次提交来解决，那么开发者需要给自己提一个issue，把缺陷记录下来，分配给自己，避免被遗忘。开发者还可以在代码中标记TODO、FIXME来连接到这个issue上。</p>
+<h4 id="对于严格审查的抱怨"><a href="#对于严格审查的抱怨" class="headerlink" title="对于严格审查的抱怨"></a>对于严格审查的抱怨</h4><p>如果你之前审查相当宽松，而现在变得严苛，有些开发者会产生抱怨。提升代码审查的<a href="https://google.github.io/eng-practices/review/reviewer/speed.html" target="_blank" rel="external">速度和效率</a>通常可以使这些抱怨消失。</p>
+<p>有时可能需要花数月的时间才能使这些抱怨消失，但是一旦每个开发者自己也认识到严格审查的好处，对他们产生好的代码多有帮助，他们就会意识到这件事情多么有价值。而且一般抱怨声最大的很有可能成为你的最大支持者。</p>
+<h4 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h4><p>如果你遵循了上述所有的操作，仍然无法解决双方的冲突时，再回过头去参阅<a href="https://google.github.io/eng-practices/review/reviewer/standard.html" target="_blank" rel="external">The Standard of Code Review</a>，获取有助于解决冲突的准则和规范。 </p>
+<h2 id="The-CL-author’s-guide-to-getting-through-code-review"><a href="#The-CL-author’s-guide-to-getting-through-code-review" class="headerlink" title="The CL author’s guide to getting through code review"></a>The CL author’s guide to getting through code review</h2><h3 id="有一个好的CL描述"><a href="#有一个好的CL描述" class="headerlink" title="有一个好的CL描述"></a>有一个好的CL描述</h3><p>一个好的CL描述应该是这笔提交做了什么改变以及为什么做出这样的改变。它会成为此项目版本管理恒久的一部分。可能被数百人阅读，不仅仅是你的reviewer。</p>
+<p>未来的开发者很有可能根据CL的描述去搜索它，因为这些开发者可能有些模糊的记忆，但是没有现成的细节。如果所有重要信息都体现在代码中而不是提交描述中，那对于他们检索来说找到你的CL是很困难的。</p>
+<h4 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h4><ul>
+<li>简短总结做了什么</li>
+<li>要是完整的一句话，像命令一样的祈使句</li>
+<li>后面跟一行空行<br>第一行是将来开发者在版本控制历史中搜索时看的最多的重要部分，所以第一行应该有足够的信息。他们可能不需要阅读你CL的代码或者整体描述，就是想知道这个CL究竟做了什么。</li>
+</ul>
+<p>按照惯例，第一行CL的描述应该是完整的一句话，看起来像一行命令形式的祈使句。比如说，最好写成”<strong>Delete</strong> the FizzBuzz RPC and <strong>replace</strong> it with the new system.”，而不是”Deleting the FizzBuzz RPC and replacing it with the new system.”后面部分的描述就可以不用祈使句了。</p>
+<blockquote>
+<p>在AOSP中随便找了一个CL：<a href="https://android.googlesource.com/platform/frameworks/base/+/201a319860beddea12cd534fa254cb89afc61821" target="_blank" rel="external">https://android.googlesource.com/platform/frameworks/base/+/201a319860beddea12cd534fa254cb89afc61821</a> 可以参考一下作者的第一行描述是这么说的：</p>
+</blockquote>
+<p>Support for hotspot client visibility.</p>
+<h4 id="主体部分——尽可能足够的信息量"><a href="#主体部分——尽可能足够的信息量" class="headerlink" title="主体部分——尽可能足够的信息量"></a>主体部分——尽可能足够的信息量</h4><p>第一行之外的描述要尽可能饱含足够的信息量。可以是针对要解决的问题的简短描述，以及为什么这是它的最佳解决方案。如果解决方案有任何缺点或隐患，应该在这里描述出来。如果有相关的背景信息，比如bug单号、基准测试结果、设计文档链接等都一并列出。</p>
+<p>如果有外部链接资源等，需要考虑后续的读者/开发者有没有权限去访问，对他们是否可见。确保他们有合适的上下文环境以助于他们理解这个CL。</p>
+<p>每一笔提交，即便是很小的更改都要注意信息的细节，把它放到合适的上下文。</p>
+<h5 id="反例"><a href="#反例" class="headerlink" title="反例"></a>反例</h5><p>首当其冲的是——<strong>“Fix bug”</strong>，这是一个很不合适的CL描述，什么bug？你为了fix它做了些什么？其它类似的反例还有：</p>
+<ul>
+<li>“Fix build.”</li>
+<li>“Add patch.”</li>
+<li>“Moving code from A to B.”</li>
+<li>“Phase 1.”</li>
+<li>“Add convenience functions.”</li>
+<li>“kill weird URLs.”<br>这些都是我们日常工作中很常见的其实，可能它们的作者认为提供了有用的信息，可是这些除了绕过脚本检测没有实际的信息传递的用途。</li>
+</ul>
+<h5 id="正例"><a href="#正例" class="headerlink" title="正例"></a>正例</h5><p>这里只是示例好的描述大体应该怎么写，当然，还缺少必要的资源链接等。</p>
+<p>比如功能变更的一个好例子：</p>
+<blockquote>
+<p>rpc: remove size limit on RPC server message freelist.</p>
+<p>Servers like FizzBuzz have very large messages and would benefit from reuse. Make the freelist larger, and add a goroutine that frees the freelist entries slowly over time, so that idle servers eventually release all freelist entries.</p>
+</blockquote>
+<p>第一行简明扼要的一句话表达了这个CL做了什么。其余的部分阐述了要解决的问题是什么，为什么这是一个好的解决方案，以及关于具体实现的更多信息。</p>
+<p>再比如，重构的一个好例子：</p>
+<blockquote>
+<p>Construct a Task with a TimeKeeper to use its TimeStr and Now methods.</p>
+<p>Add a Now method to Task, so the borglet() getter method can be removed (which was only used by OOMCandidate to call borglet’s Now method). This replaces the methods on Borglet that delegate to a TimeKeeper.</p>
+<p>Allowing Tasks to supply Now is a step toward eliminating the dependency on Borglet. Eventually, collaborators that depend on getting Now from the Task should be changed to use a TimeKeeper directly, but this has been an accommodation to refactoring in small steps.</p>
+<p>Continuing the long-range goal of refactoring the Borglet Hierarchy.</p>
+</blockquote>
+<p>第一行描述了这笔CL做了什么更改，是从什么改过来的。描述的其余部分阐述了具体的实现、CL的上下文，并指出解决方案并不是终极理想的方案以及未来可能的方向。通过这些描述也不难看出为什么会发生这种变化。</p>
+<p>再比如一个很小的变更，但是需要给读者提供上下文环境的描述：</p>
+<blockquote>
+<p>Create a Python3 build rule for status.py.</p>
+<p>This allows consumers who are already using this as in Python3 to depend on a rule that is next to the original status build rule instead of somewhere in their own tree. It encourages new consumers to use Python3 if they can, instead of Python2, and significantly simplifies some automated build file refactoring tools being worked on currently.</p>
+</blockquote>
+<p>第一行说了这笔提交实际做了什么。剩余的部分描述了为什么要做这样的更改，给读者提供尽可能详尽的上下文环境。</p>
+<p><strong>开发者提交代码Review之前自己先Review commit信息</strong></p>
+<p>CL在审查期间可能发生重大变化。在提交CL之前，有必要检查CL的描述，以确保该描述仍然反映CL的功能。</p>
+<h3 id="一次提交要尽可能保持小"><a href="#一次提交要尽可能保持小" class="headerlink" title="一次提交要尽可能保持小"></a>一次提交要尽可能保持小</h3><h4 id="为什么要尽量小？"><a href="#为什么要尽量小？" class="headerlink" title="为什么要尽量小？"></a>为什么要尽量小？</h4><p>一个小的，精悍的CL有一下好处：</p>
+<ul>
+<li>Review的速度更快。对于评审者来说，每次review5分钟，多次review要比一次性review30分钟要容易和轻松。</li>
+<li>Review会更彻底，不会有遗漏。如果一笔CL很长很大，评审者和作者有时来回流转大量的评论和回复，二者都容易产生沮丧等消极心理，很容易遗漏重要的内容。</li>
+<li>不太容易引入新的bug。由于你的提交更改的文件很少，对于你自己和评审者来说更容易清晰有效地推断是否会引入bug。</li>
+<li>如果被拒绝合入，无用功做的会少一些。</li>
+<li>容易合并。产生冲突的几率小，而且产生了冲突好解决。</li>
+<li>易于设计。优化一个小更改的设计和代码健康状况要比细化一个大更改的所有细节容易得多。</li>
+<li>由review带来的对整体项目进程的block程度很小。如果一个CL足够小，即便是产生重新设计和实现，对你后续工作影响也很小，这样你就可以在CL处于待review状态时继续后续工作了。</li>
+<li>回滚更简单。<br>请注意，reviewer有权以您的提交太庞大为唯一理由而拒绝这笔CL。一般他们当然是尊重您的劳动，正是处于责任心，才要求您分批进行提交review。所以尽量以最小变更单元来进行提交review。</li>
+</ul>
+<h4 id="什么样的才是小的CL？"><a href="#什么样的才是小的CL？" class="headerlink" title="什么样的才是小的CL？"></a>什么样的才是小的CL？</h4><ul>
+<li>一般来说，一笔CL应该就应该且只包含一个独立的更改。这就意味着：</li>
+<li>只包含一件事情的修改。比如一个大的功能，需要拆分成不同的功能子集，而不是说提交一个完整的功能。可以针对功能等跟你的评审者一起商议出最合适的可一次提交的子集。</li>
+<li>确保需要评审者可以通过CL的代码更改、CL描述、代码库中已有的代码、或者之前他Review过的代码来理解它。</li>
+<li>合入这笔CL之后，系统可以正常运行。</li>
+<li>并不是说越小越好。比如说如果您添加了一个新的API，您应该在相同的CL中包含该API的用法，以便审阅人员能够更好地理解如何使用该API。</li>
+</ul>
+<p>对于“太小”、“太大”其实没有一个硬性的标准。一般来说100行通常是合理的大小，而1000行就有点太大了。这个取决于评审者的判断。一个更改所涉及的文件数量也影响“大小”的判断。在一个文件中更改200行是可接受的，但是在50个不同的文件中总共更改200行就是难以接受的。</p>
+<p>请记住，自己维护的代码可能一开始就特别了解，但是对于你的reviewer通常没有这么顺畅的上下文环境。所以很可能你觉得你提交的并不大，但是你的reviewer却觉得有些大。所以当对方有疑惑时，尽可能编写可单独拆分出来的最小单元。一般reviewer肯定不会抱怨你提交的这笔更改太小的。</p>
+<h4 id="什么时候提交大的更改是合适的？"><a href="#什么时候提交大的更改是合适的？" class="headerlink" title="什么时候提交大的更改是合适的？"></a>什么时候提交大的更改是合适的？</h4><p>当然，有些时候提交大的变更是合适的：</p>
+<ul>
+<li>比如你删除了一个文件，虽然这个文件原来很多内容，但是reviewer也不会话很长时间去care，所以这个文件其实可以算成“一行”更改。</li>
+<li>再比如一些自动生成的，完全可信任的代码，代码评审者也不会太关心具体到每一行的，他的工作就是检查并确认这些生成的是必要的。这些都不算是“大”的范畴之内。</li>
+</ul>
+<h4 id="重构单独提交"><a href="#重构单独提交" class="headerlink" title="重构单独提交"></a>重构单独提交</h4><p>重构一定不要和bug fix或者功能开发一起提交。比如说重命名并且移动一个类的位置等不要和修复这个类本身的bug一起去提交，应该分不同笔CL进行提交。</p>
+<p>不过可以在功能开发或bug fix的时候包含适当修改相关的变量名等。由开发者和评审者确认功能开发或bug fix中是否有大的重构工作导致review变的困难。</p>
+<h4 id="在同一个CL中要包含相关的测试代码"><a href="#在同一个CL中要包含相关的测试代码" class="headerlink" title="在同一个CL中要包含相关的测试代码"></a>在同一个CL中要包含相关的测试代码</h4><p>在提交一个bug fix或者功能开发时，不要把和CL相关的代码单独提交。相关的测试代码即便是增加了代码行数，也应该是在同一个CL中。</p>
+<p>但是，以下场景时，独立的测试修改可以单独合入，就像refactorings guidelines里描述的那样。</p>
+<ul>
+<li>用新的测试代码验证已存在的，已入库的代码；</li>
+<li>重构测试代码本身；</li>
+<li>引入更大的测试框架，比如集成测试等。</li>
+</ul>
+<h4 id="不要导致整个系统的编译失败"><a href="#不要导致整个系统的编译失败" class="headerlink" title="不要导致整个系统的编译失败"></a>不要导致整个系统的编译失败</h4><p>有时候，你的几笔CL提交之间有相互依赖关系。使用一种方法（比如topic等）来确保每个提交合入之后不会影响整个系统的编译。</p>
+<h4 id="实在不能再小了？"><a href="#实在不能再小了？" class="headerlink" title="实在不能再小了？"></a>实在不能再小了？</h4><p>有时您也许会遇到这种情况，就是这个CL确实很大，不能再拆了。事实上，这种情况应该很少的，因为在实践中，智慧的开发者总是能找到一种方式把它拆解成更小的几笔提交的。</p>
+<p>在准备着手进行一笔大的修改之前，先按照上述的规则考虑一下是否可以应用拆分不同的提交。跟相关的同事或者reviewer等交流，看怎样拆解合适。</p>
+<p>如果经过努力确实不能再拆，是一笔巨大的提交。那请提前和reviewer沟通好，让他做好准备，预期要一个长的评审过程。一定要确保，不要因为大就引入新的bug，一定要覆盖好测试代码。</p>
+<h3 id="如何处理评审者的评论"><a href="#如何处理评审者的评论" class="headerlink" title="如何处理评审者的评论"></a>如何处理评审者的评论</h3><p>你提交代码之后review过程开始后可能会收到评审者针对你的CL的一个或若干个评论。下面给出一些处理这种评论的有用建议。</p>
+<h4 id="不要把“自己”本人带入"><a href="#不要把“自己”本人带入" class="headerlink" title="不要把“自己”本人带入"></a>不要把“自己”本人带入</h4><p>代码review本身的目的是确保我们的代码库中整体的健康程度可以随着时间的推移可以不断改善，维护我们代码库和产品的质量。当评审者对您的代码提出疑义或者批评时，你应该认为那是他们对你、对项目、代码库和对公司的帮助，而不是说针对你本人的质疑，更不是人身攻击。</p>
+<p>有时评审者会带有消极的情绪并且在评论中字里行间可以透漏出来。当然，这对于评审者是不应该的，但作为我们开发者，要有这种心理准备。大度一些，跳出评审者评论中有用的部分，真的值得改进的部分，其它的情绪部分假装没看到就行了。</p>
+<p>不要对评审者做出愤怒甚或是语言攻击等的回应。这是职业礼仪问题，而且这也永远记录在评审记录中。如果你被情绪控制，不能立即做出回应，那先离开电脑，平静一会儿。直到缓和下来，再有礼貌地进行回复。</p>
+<p>一般来说，如果评审者没有给出建设性的、有礼貌的、有用的反馈，就尝试当面沟通解释。或者视频会议、发私人邮件等。用友善的方式表达你期待的结果、希望他/她做出的改变。如果这些都没用，他/她还是一意孤行，提出的评审只有情绪没有任何价值的东西，那你需要想办法根据情况把事情上升到你们的上级。</p>
+<h4 id="修复你的代码"><a href="#修复你的代码" class="headerlink" title="修复你的代码"></a>修复你的代码</h4><p>如果评审者说看不懂你的代码，你应该第一时间考虑是否代码本身可以自证无问题。如果无法通过代码本身澄清，试着加入一些代码注释，请记住注释是说明代码存在在这里的原因。如果你断定在这里加注释毫无意义，可以退而在代码评审工具中给评审者做出解释。</p>
+<p>如果评审者不理解你的代码，很可能其他未来的开发者，代码阅读者也不会理解。在代码评审工具中做出解释并不能帮助将来的代码读者，但是澄清您的代码或添加代码注释确实可以帮助到他们。</p>
+<h4 id="独立思考"><a href="#独立思考" class="headerlink" title="独立思考"></a>独立思考</h4><p>编写一个CL会耗费大量的工作量，一般你辛辛苦苦完成并自测自我感觉很满意没有问题后，觉得这部分工作就要收尾了，自信满满觉得这块没有其它额外工作了。但是当评审者并没有LGTM，approval（+2），而是评论出一堆问题返回给你时，人性本能会很容易排斥，认为这些是错误的。然而，不管你有多自信，多确定，花点时间好好看一下，再review一下，考虑一下评审者是否提出了有价值的反馈？这对代码库和公司是很有益的，你对自己的第一个问题应该是“评审者是对的吗？”</p>
+<p>如果你不确定对不对，就需要找评审者去澄清他/她的评论。</p>
+<p>如果您已经考虑并且沟通过了，仍坚持认为自己是正确的，那么可以自由地解释为什么您的方法更适合代码库、用户和/或公司。通常情况下，评审者实际上是在提供建议，他们希望您自己考虑什么是最好的。实际上，您可能更多的了解用户、代码库或CL的信息，而审稿人并不知道这些。可以视图再给他们更多的背景信息。通常情况下，你可以和评审者可以根据技术事实达成一些共识的。</p>
+<h4 id="解决冲突-1"><a href="#解决冲突-1" class="headerlink" title="解决冲突"></a>解决冲突</h4><p>解决冲突的第一步应该是试着和你的评审者达成一致。如果不能达成一致，再回过头去参阅The <a href="https://google.github.io/eng-practices/review/reviewer/standard.html" target="_blank" rel="external">Standard of Code Review</a>，获取有助于解决冲突的准则和规范。 </p>
+<hr>
+<blockquote>
+<ul>
+<li><p>CL：Change List</p>
+</li>
+<li><p>LGTM： Looks Good to Me</p>
+</li>
+<li><p>NIT：Nit-Pick </p>
+</li>
+</ul>
+</blockquote>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://github.com/guoxiaojiang/hello-word/raw/master/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://github.com/guoxiaojiang/hello-word/raw/master/WX20170505.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -211,15 +496,11 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tech</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">settings</a>
-        		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -232,17 +513,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/03/code_review/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/05/18/flutter_architecture/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Flutter 初体验和应用架构浅析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -265,8 +633,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
